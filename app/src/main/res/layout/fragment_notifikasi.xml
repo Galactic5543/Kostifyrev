@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/warna7"
+    tools:context=".Notifikasi"
+    android:paddingBottom="15dp">
+
+    <!-- Ikon kiri (pinggir kiri) -->
+    <ImageView
+        android:id="@+id/icsort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_sort"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+   />
+
+    <!-- Ikon kanan (pinggir kanan) -->
+    <ImageView
+        android:id="@+id/icdot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_dot"
+        android:layout_marginTop="10dp"
+        android:contentDescription="Dot Icon"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp"
+   />
+
+    <!-- Teks Notifikasi di tengah -->
+    <TextView
+        android:id="@+id/textnotifikasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifikasi"
+        android:textSize="29sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+     android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/txtemail"
+        android:layout_width="287dp"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/icsort"
+        android:layout_alignEnd="@id/icdot"
+        android:layout_below="@+id/textnotifikasi"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/backgroundedittextlgn"
+      android:layout_marginTop="10dp"
+        android:padding="2dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textColor="@color/black"
+        android:hint="Search"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="20dp"
+        android:textSize="15sp"
+        android:textColorHint="@color/abu"/>
+
+
+</RelativeLayout>
