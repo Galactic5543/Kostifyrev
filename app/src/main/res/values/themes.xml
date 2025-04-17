@@ -11,6 +11,14 @@
     <style name="splashscreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="android:windowBackground">@drawable/background_splashscreen</item>
-        <item name="android:statusBarColor" tools:targrtApi="L">?attr/colorPrimary</item>
+        <item name="android:statusBarColor" tools:targetApi="L">?attr/colorPrimary</item>
     </style>
+
+
+    <!-- Mask Profil -->
+    <style name="ImageViewMaskStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15%</item> <!-- Ini untuk bentuk lingkaran -->
+    </style>
+
 </resources>
