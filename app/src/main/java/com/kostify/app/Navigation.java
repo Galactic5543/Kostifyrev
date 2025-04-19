@@ -9,51 +9,42 @@ import com.kostify.app.databinding.ActivityNavigationBinding;
 
 public class Navigation extends AppCompatActivity {
 
-ActivityNavigationBinding binding;
+    ActivityNavigationBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replacefragment(new Notifikasi());
 
-        // Mengatur Bottom Navigation
+        // Set default fragment
+        replaceFragment(new Notifikasi());
+
+        // Bottom Navigation Item Selected
         binding.bottomNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
             if (itemId == R.id.penyewa) {
-                replacefragment(new Penyewa());
+                replaceFragment(new Penyewa());
                 return true;
-
-            }
-
-            else if (itemId == R.id.pemilik) {
-                replacefragment(new Pemilik());
+            } else if (itemId == R.id.pemilik) {
+                replaceFragment(new Pemilik());
                 return true;
-
-            }
-
-            else if (itemId == R.id.notifikasi) {
-                replacefragment(new Notifikasi());
+            } else if (itemId == R.id.notifikasi) {
+                replaceFragment(new Notifikasi());
                 return true;
-
-            }
-
-            else if (itemId == R.id.profil) {
-                replacefragment(new Profil());
+            } else if (itemId == R.id.profil) {
+                replaceFragment(new Profil());
                 return true;
-
             }
             return false;
         });
     }
 
-    private void replacefragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout,fragment);
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit();
     }
-
 }
