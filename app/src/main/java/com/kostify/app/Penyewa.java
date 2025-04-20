@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class Penyewa extends Fragment {
 
@@ -13,19 +13,59 @@ public class Penyewa extends Fragment {
         // Required empty public constructor
     }
 
-    public static Penyewa newInstance(String param1, String param2) {
-        Penyewa fragment = new Penyewa();
-        Bundle args = new Bundle();
-        args.putString("param1", param1);
-        args.putString("param2", param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_penyewa, container, false);
+        View view = inflater.inflate(R.layout.fragment_penyewa, container, false);
+
+        // Navigasi ke Informasi Kost
+        view.findViewById(R.id.mn_info_kost).setOnClickListener(v -> openInformasiKostFragment());
+
+        // Navigasi ke Sosial
+        view.findViewById(R.id.mn_sosial).setOnClickListener(v -> openSosialFragment());
+
+        // Navigasi ke Pengajuan
+        view.findViewById(R.id.mn_pengajuan).setOnClickListener(v -> openPengajuanFragment());
+
+        // Navigasi ke Info Sewa
+        view.findViewById(R.id.mn_info_sewa).setOnClickListener(v -> openInfoSewaFragment());
+
+        // Navigasi ke Pembayaran
+        view.findViewById(R.id.mn_pembayaran).setOnClickListener(v -> openPembayaranFragment());
+
+        return view;
+    }
+
+    private void openInformasiKostFragment() {
+        Fragment fragment = new informasi_kost();
+        navigateToFragment(fragment);
+    }
+
+    private void openSosialFragment() {
+        Fragment fragment = new sosial();
+        navigateToFragment(fragment);
+    }
+
+    private void openPengajuanFragment() {
+        Fragment fragment = new Pengajuan();
+        navigateToFragment(fragment);
+    }
+
+    private void openInfoSewaFragment() {
+        Fragment fragment = new info_sewa();
+        navigateToFragment(fragment);
+    }
+
+    private void openPembayaranFragment() {
+        Fragment fragment = new pembayaran();
+        navigateToFragment(fragment);
+    }
+
+    // Helper method untuk navigasi fragment
+    private void navigateToFragment(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayout, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

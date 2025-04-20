@@ -207,6 +207,7 @@
 
             <!-- ===================== INFO KOST ===================== -->
             <RelativeLayout
+                android:id="@+id/mn_info_kost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -259,8 +260,9 @@
                 android:layout_height="1dp"
                 android:background="@drawable/garis" />
 
-            <!-- ===================== PENGAJUAN ===================== -->
+            <!-- ===================== Pengajuan ===================== -->
             <RelativeLayout
+                android:id="@+id/mn_pengajuan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -316,6 +318,7 @@
 
             <!-- ===================== SOSIAL ===================== -->
             <RelativeLayout
+                android:id="@+id/mn_sosial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -371,6 +374,7 @@
 
             <!-- ===================== INFO SEWA ===================== -->
             <RelativeLayout
+                android:id="@+id/mn_info_sewa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -426,6 +430,7 @@
 
             <!-- ===================== PEMBAYARAN ===================== -->
             <RelativeLayout
+                android:id="@+id/mn_pembayaran"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -80,7 +79,7 @@ public class Login extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign in success
-                        Intent intent = new Intent(Login.this, Navigation.class);
+                        Intent intent = new Intent(Login.this, menu_utama_navigasi.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -106,7 +105,7 @@ public class Login extends AppCompatActivity {
                             String status = document.getString("status");
                             if ("verified".equals(status)) {
                                 // Kalau sudah terverifikasi, masuk ke halaman utama
-                                startActivity(new Intent(Login.this, Navigation.class));
+                                startActivity(new Intent(Login.this, menu_utama_navigasi.class));
                                 finish();
                             } else {
                                 // Kalau belum, arahkan ke OTP page
@@ -122,7 +121,7 @@ public class Login extends AppCompatActivity {
 
 
     public void notifikasi(View view) {
-        Intent intent = new Intent(Login.this, Navigation.class);
+        Intent intent = new Intent(Login.this, menu_utama_navigasi.class);
         startActivity(intent);
     }
 }

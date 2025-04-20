@@ -1,26 +1,28 @@
 package com.kostify.app;
 
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.kostify.app.databinding.ActivityNavigationBinding;
+import com.kostify.app.databinding.ActivityNavigasiUtamaBinding;
 
-public class Navigation extends AppCompatActivity {
+public class menu_utama_navigasi extends AppCompatActivity {
 
-    ActivityNavigationBinding binding;
+    ActivityNavigasiUtamaBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityNavigationBinding.inflate(getLayoutInflater());
+        binding = ActivityNavigasiUtamaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Set default fragment
         replaceFragment(new Notifikasi());
 
-        // Bottom Navigation Item Selected
+        // Bottom menu_utama_navigasi Item Selected
         binding.bottomNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
@@ -41,10 +43,19 @@ public class Navigation extends AppCompatActivity {
         });
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, fragment);
+
+        // Atur visibilitas bottom navigation berdasarkan fragment yang sedang aktif
+        if (fragment instanceof informasi_kost) {
+            binding.bottomNav.setVisibility(View.GONE); // Sembunyikan bottom navigation untuk InformasiKost
+        } else {
+            binding.bottomNav.setVisibility(View.VISIBLE); // Tampilkan bottom navigation untuk fragment lain
+        }
+
         fragmentTransaction.commit();
     }
+
 }

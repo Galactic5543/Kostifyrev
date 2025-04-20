@@ -122,7 +122,7 @@ public class OTP extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "Verifikasi berhasil!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(this, Navigation.class));
+                        startActivity(new Intent(this, menu_utama_navigasi.class));
                         finish();
                     } else {
                         Toast.makeText(this, "Verifikasi gagal: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -152,7 +152,7 @@ public class OTP extends AppCompatActivity {
                                         .update("status", "verified")
                                         .addOnSuccessListener(aVoid -> {
                                             Toast.makeText(this, "Verifikasi berhasil!", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(this, Navigation.class));
+                                            startActivity(new Intent(this, menu_utama_navigasi.class));
                                             finish();
                                         });
                             } else {
@@ -184,6 +184,6 @@ public class OTP extends AppCompatActivity {
     }
 
     public void Navigasi(View view) {
-        startActivity(new Intent(this, Navigation.class));
+        startActivity(new Intent(this, menu_utama_navigasi.class));
     }
 }

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".informasi_kost">
+
+    <RelativeLayout
+        android:id="@+id/kontainermenutop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:adjustViewBounds="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/textinformasikost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Informasi Kost"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/warna10"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/fotokost"
+        android:layout_below="@+id/kontainermenutop"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/bgradius5"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="15dp"/>
+
+
+    <TextView
+        android:id="@+id/namakost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fotokost"
+        android:layout_margin="15dp"
+        android:text="Informasi Kost"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/warna10"/>
+
+    <View
+        android:id="@+id/garis"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/namakost"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/garis" />
+
+
+    <TextView
+        android:id="@+id/alamat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_below="@id/garis"
+        android:text="Jl. Mahesa, Dusun II Karangrau, Karangrau, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah"
+        android:textColor="@color/warna10"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        />
+
+    <TextView
+        android:id="@+id/textkontak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/alamat"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="15dp"
+        android:text="Kontak"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/warna10"/>
+
+    <TextView
+        android:id="@+id/textpemilik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_below="@id/textkontak"
+        android:text="Pemilik : Fajar Nugroho"
+        android:textColor="@color/warna10"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        />
+
+
+
+    <TextView
+        android:id="@+id/textwhatsapp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_below="@id/textpemilik"
+        android:text="No.Whatsapp : 085748323741"
+        android:textColor="@color/warna10"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        />
+
+    <View
+        android:id="@+id/garis2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/textwhatsapp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/garis" />
+
+
+    <TextView
+        android:id="@+id/textperaturan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/garis2"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="15dp"
+        android:text="Peraturan"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/warna10"/>
+
+
+    <EditText
+        android:id="@+id/peraturan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textperaturan"
+        android:padding="10dp"
+        android:lineSpacingMultiplier="1.5"
+        android:background="@drawable/backgroundedittextstroke1radius15"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="50dp"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        android:maxLines="5"
+        android:gravity="top|start"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+
+
+</RelativeLayout>
