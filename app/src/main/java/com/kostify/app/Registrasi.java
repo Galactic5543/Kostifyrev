@@ -2,66 +2,91 @@ package com.kostify.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import android.view.View;
+
+import androidx.activity.EdgeToEdge;
 
 public class Registrasi extends AppCompatActivity {
 
     private EditText inputEmail, inputPassword, inputPhone;
     private Button btnDaftar;
-    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private String generatedOTP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_registrasi);
 
-        // Inisialisasi Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-        // Hubungkan ke layout
         inputEmail = findViewById(R.id.txtemail);
         inputPassword = findViewById(R.id.txtpassword);
-        inputPhone = findViewById(R.id.txtwhatsapp); // Ini pakai txtwhatsapp sesuai permintaan
+        inputPhone = findViewById(R.id.txtwhatsapp);
         btnDaftar = findViewById(R.id.btndaftar);
 
-        // Listener tombol daftar
-        btnDaftar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = inputEmail.getText().toString().trim();
-                String password = inputPassword.getText().toString().trim();
-                String phoneNumber = inputPhone.getText().toString().trim();
+        btnDaftar.setOnClickListener(v -> {
+            String email = inputEmail.getText().toString().trim();
+            String password = inputPassword.getText().toString().trim();
+            String phone = inputPhone.getText().toString().trim();
 
-                if (email.isEmpty() || password.isEmpty() || phoneNumber.isEmpty()) {
-                    Toast.makeText(Registrasi.this, "Email, password, dan nomor WhatsApp wajib diisi", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Proses registrasi akun email + password di Firebase
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(Registrasi.this, "Registrasi berhasil", Toast.LENGTH_SHORT).show();
-
-                                // Kirim nomor HP ke halaman OTP
-                                Intent intent = new Intent(Registrasi.this, OTP.class);
-                                intent.putExtra("phone_number", phoneNumber);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                Toast.makeText(Registrasi.this, "Gagal: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+            if(email.isEmpty() || password.isEmpty() || phone.isEmpty()) {
+                Toast.makeText(this, "Isi semua field!", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            // Generate OTP 6 digit
+            generatedOTP = generateOTP();
+
+            // Simpan ke Firestore
+            Map<String, Object> otpData = new HashMap<>();
+            otpData.put("otp", generatedOTP);
+            otpData.put("created_at", System.currentTimeMillis());
+            otpData.put("status", "unverified");
+
+            db.collection("otp_verification")
+                    .document(email)
+                    .set(otpData)
+                    .addOnSuccessListener(aVoid -> {
+                        // Kirim OTP via email (Untuk production gunakan Firebase Functions)
+                        sendOTPEmail(email, generatedOTP);
+
+                        // Pindah ke halaman OTP
+                        Intent intent = new Intent(Registrasi.this, OTP.class);
+                        intent.putExtra("EMAIL", email);
+                        startActivity(intent);
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(
+                            Registrasi.this,
+                            "Gagal menyimpan OTP: " + e.getMessage(),
+                            Toast.LENGTH_SHORT
+                    ).show());
         });
+    }
+
+    private String generateOTP() {
+        return String.format("%06d", new Random().nextInt(999999));
+    }
+
+    private void sendOTPEmail(String email, String otp) {
+        // Implementasi pengiriman email disini
+        // Contoh sederhana untuk testing:
+        Toast.makeText(
+                this,
+                "OTP: " + otp + " dikirim ke " + email,
+                Toast.LENGTH_LONG
+        ).show();
     }
 }
