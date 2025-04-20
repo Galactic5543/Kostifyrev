@@ -28,14 +28,6 @@ public class informasi_kost extends Fragment {
             }
         });
 
-        // Menyembunyikan bottom navigation ketika fragment ini ditampilkan
-        if (getActivity() != null) {
-            menu_utama_navigasi activity = (menu_utama_navigasi) getActivity();
-            if (activity != null) {
-                activity.binding.bottomNav.setVisibility(View.GONE); // Sembunyikan bottom navigation
-            }
-        }
-
         return view;
     }
 
@@ -49,13 +41,5 @@ public class informasi_kost extends Fragment {
                 .replace(R.id.frameLayout, penyewaFragment)
                 .addToBackStack(null)
                 .commit();
-
-        // Tampilkan kembali bottom navigation saat kembali ke Penyewa
-        if (getActivity() != null) {
-            menu_utama_navigasi activity = (menu_utama_navigasi) getActivity();
-            if (activity != null) {
-                activity.binding.bottomNav.setVisibility(View.VISIBLE); // Tampilkan kembali bottom navigation
-            }
-        }
     }
 }
