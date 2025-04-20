@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "224495928691-ct7toe6k6pmjgjo6s0hprt7t1h7e3jq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kostify.app",
+            "certificate_hash": "61cba916be22bdc13916a5a0d8d5899e7ff5adeb"
+          }
+        },
+        {
           "client_id": "224495928691-0mpa7jgtqgn5hoj5k1trlq8p6jt6l160.apps.googleusercontent.com",
           "client_type": 3
         }

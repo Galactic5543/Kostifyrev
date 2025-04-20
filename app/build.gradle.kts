@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.google.gms.google.services) // ✅ Plugin Google Services
+    alias(libs.plugins.google.gms.google.services) // Plugin Google Services
 }
 
 android {
@@ -17,7 +17,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    // ✅ Aktifkan viewBinding
     buildFeatures {
         viewBinding = true
     }
@@ -39,24 +38,26 @@ android {
 }
 
 dependencies {
-    // ✅ UI & Layout
+    // UI & Layout
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
 
-    // ✅ Firebase Auth & Realtime Database
+    // Firebase Core
+    implementation(libs.firebase.firestore)
+
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
 
-    // ✅ Google Sign-In (optional kalau pakai Google Login)
+    // Google Sign-In (jika digunakan)
     implementation(libs.googleid)
     implementation(libs.credentials)
     implementation(libs.credentials.play.services.auth)
-    implementation (libs.play.services.auth)
-    implementation(libs.firebase.firestore)
+    implementation(libs.play.services.auth)
 
-    // ✅ Testing
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

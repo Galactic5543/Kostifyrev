@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Login extends AppCompatActivity {
 
@@ -92,12 +93,33 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // Cek jika user sudah login
         if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(Login.this, Navigation.class));
-            finish();
+            // Tambahkan pengecekan status verifikasi OTP
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            String email = mAuth.getCurrentUser().getEmail();
+
+            db.collection("otp_verification")
+                    .document(email)
+                    .get()
+                    .addOnSuccessListener(document -> {
+                        if (document.exists()) {
+                            String status = document.getString("status");
+                            if ("verified".equals(status)) {
+                                // Kalau sudah terverifikasi, masuk ke halaman utama
+                                startActivity(new Intent(Login.this, Navigation.class));
+                                finish();
+                            } else {
+                                // Kalau belum, arahkan ke OTP page
+                                Intent intent = new Intent(Login.this, OTP.class);
+                                intent.putExtra("EMAIL", email);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                    });
         }
     }
+
 
     public void notifikasi(View view) {
         Intent intent = new Intent(Login.this, Navigation.class);
