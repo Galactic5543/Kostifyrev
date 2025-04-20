@@ -42,24 +42,26 @@
      android:layout_centerHorizontal="true" />
 
     <EditText
-        android:id="@+id/txtemail"
+        android:id="@+id/search"
         android:layout_width="287dp"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textnotifikasi"
         android:layout_alignStart="@+id/icsort"
         android:layout_alignEnd="@id/icdot"
-        android:layout_below="@+id/textnotifikasi"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/backgroundedittextlgn"
-      android:layout_marginTop="19dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/backgroundedittextstroke1radius15"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="20dp"
+        android:hint="Search"
         android:padding="2dp"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:textColor="@color/black"
-        android:hint="Search"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="20dp"
-        android:textSize="15sp"
-        android:textColorHint="@color/abu"/>
+        android:textColorHint="@color/abu"
+        android:textSize="15sp" />
 
 
 </RelativeLayout>
