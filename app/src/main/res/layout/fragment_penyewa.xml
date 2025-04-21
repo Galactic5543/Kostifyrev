@@ -260,7 +260,7 @@
                 android:layout_height="1dp"
                 android:background="@drawable/garis" />
 
-            <!-- ===================== Pengajuan ===================== -->
+            <!-- ===================== pengajuan_kerusakan ===================== -->
             <RelativeLayout
                 android:id="@+id/mn_pengajuan"
                 android:layout_width="match_parent"

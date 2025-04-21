@@ -72,7 +72,7 @@ public class menu_utama_navigasi extends AppCompatActivity {
     private void updateBottomNavVisibility(Fragment fragment) {
         if (fragment instanceof informasi_kost ||
                 fragment instanceof pembayaran ||
-                fragment instanceof Pengajuan ||
+                fragment instanceof pengajuan_kerusakan ||
                 fragment instanceof sosial ||
                 fragment instanceof info_sewa) {
             binding.bottomNav.setVisibility(View.GONE);

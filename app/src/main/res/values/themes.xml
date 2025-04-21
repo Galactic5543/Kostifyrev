@@ -15,6 +15,21 @@
     </style>
 
 
+    <style name="BottomNavTextNormal" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="BottomNavTextActive" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item> <!-- Ganti jadi bold kalau mau -->
+    </style>
+
+
+
+
+
+
     <!-- Mask Profil -->
     <style name="ImageViewMaskStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>

@@ -1,5 +1,6 @@
 package com.kostify.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ public class Penyewa extends Fragment {
         // Navigasi ke Sosial
         view.findViewById(R.id.mn_sosial).setOnClickListener(v -> openSosialFragment());
 
-        // Navigasi ke Pengajuan
+        // Navigasi ke pengajuan_kerusakan
         view.findViewById(R.id.mn_pengajuan).setOnClickListener(v -> openPengajuanFragment());
 
         // Navigasi ke Info Sewa
@@ -47,9 +48,10 @@ public class Penyewa extends Fragment {
     }
 
     private void openPengajuanFragment() {
-        Fragment fragment = new Pengajuan();
-        navigateToFragment(fragment);
+        Intent intent = new Intent(getActivity(), navigasi_pengajuan.class);
+        startActivity(intent);
     }
+
 
     private void openInfoSewaFragment() {
         Fragment fragment = new info_sewa();
