@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OTP">
+    tools:context=".join_kost">
+
 
 
     <ImageView
@@ -23,10 +22,10 @@
         android:padding="8dp"/>
 
     <TextView
-        android:id="@+id/textotp"
+        android:id="@+id/textkode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OTP"
+        android:text="Join Kost"
         android:layout_marginTop="100dp"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
@@ -35,11 +34,11 @@
         android:textColor="@color/black"/>
 
     <TextView
-        android:id="@+id/textotpdeskripsi"
+        android:id="@+id/textcaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kami telah mengirimkan email kepada Anda, silakan periksa email Anda dan masukkan kode OTP"
-        android:layout_below="@+id/textotp"
+        android:text="Masukkan Kode Kost untuk bergabung sebagai penghuni aktif"
+        android:layout_below="@+id/textkode"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:layout_margin="15dp"
@@ -53,31 +52,31 @@
 
 
 
-        <EditText
-            android:id="@+id/txtotp"
-            android:layout_width="match_parent"
-            android:layout_marginHorizontal="30dp"
-            android:layout_height="48dp"
-            android:inputType="number"
-            android:layout_below="@+id/textotpdeskripsi"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/backgroundedittextstroke1radius15"
-            android:padding="2dp"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:hint="0"
-            android:textColorHint="@color/abu"/>
+    <EditText
+        android:id="@+id/txtkode"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_height="48dp"
+        android:inputType="number"
+        android:layout_below="@+id/textcaption"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/backgroundedittextstroke1radius15"
+        android:padding="2dp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:hint="0"
+        android:textColorHint="@color/abu"/>
 
 
     <Button
         android:id="@+id/btnkonfirmasi"
         android:layout_width="287dp"
         android:layout_height="53dp"
-        android:layout_below="@+id/txtotp"
+        android:layout_below="@+id/txtkode"
         android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
         android:background="@drawable/backgroundbutton"
-        android:text="Konfirmasi"
+        android:text="Konfirmasi Kode"
         android:textSize="14sp"
         android:textColor="@color/white"
         android:onClick="Navigasi"/>

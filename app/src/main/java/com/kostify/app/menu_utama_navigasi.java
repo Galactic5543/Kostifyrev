@@ -71,13 +71,13 @@ public class menu_utama_navigasi extends AppCompatActivity {
     // Fungsi pengecekan fragment mana yang perlu menyembunyikan bottom nav
     private void updateBottomNavVisibility(Fragment fragment) {
         if (fragment instanceof informasi_kost ||
-                fragment instanceof pembayaran ||
-                fragment instanceof pengajuan_kerusakan ||
-                fragment instanceof sosial ||
-                fragment instanceof info_sewa) {
-            binding.bottomNav.setVisibility(View.GONE);
-        } else {
+                fragment instanceof Notifikasi ||
+                fragment instanceof Penyewa ||
+                fragment instanceof Pemilik ||
+                fragment instanceof Profil) {
             binding.bottomNav.setVisibility(View.VISIBLE);
+        } else {
+            binding.bottomNav.setVisibility(View.GONE);
         }
     }
 }

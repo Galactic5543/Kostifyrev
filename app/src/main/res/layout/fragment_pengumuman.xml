@@ -5,5 +5,98 @@
     android:layout_height="match_parent"
     tools:context=".pengumuman">
 
+    <RelativeLayout
+        android:id="@+id/kontainermenutop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:adjustViewBounds="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/textpengumuman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pengumuman"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/warna10"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_below="@id/kontainermenutop"
+        android:id="@+id/textjudul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Judul"
+        android:layout_marginHorizontal="15dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/warna10"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/txtjudul"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/textjudul"
+        android:background="@drawable/backgroundedittextstroke1radius15"
+        android:maxLines="5"
+        android:gravity="top|start" />
+
+
+    <TextView
+        android:id="@+id/textisi"
+        android:layout_below="@id/txtjudul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:text="Isi"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/warna10"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/txtisi"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/textisi"
+        android:padding="10dp"
+        android:layout_marginTop="8dp"
+        android:lineSpacingMultiplier="1.5"
+        android:background="@drawable/backgroundedittextstroke1radius15"
+        android:inputType="textMultiLine"
+        android:layout_marginHorizontal="15dp"
+        android:scrollbars="vertical"
+        android:maxLines="5"
+        android:gravity="top|start" />
+
+    <Button
+        android:id="@+id/btnajukankerusakan"
+        android:layout_below="@+id/txtisi"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Umumkan"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/backgroundbutton"
+        android:backgroundTint="@color/warna7"
+        android:layout_marginHorizontal="30dp"
+        android:textSize="14sp"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

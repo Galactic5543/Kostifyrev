@@ -36,6 +36,14 @@ public class Penyewa extends Fragment {
 
         view.findViewById(R.id.btndetailsewa).setOnClickListener(v -> opendetailsewa());
 
+        view.findViewById(R.id.mngabung).setOnClickListener(v -> openkodejoin());
+
+        view.findViewById(R.id.mnperpanjangsewa).setOnClickListener(v -> openperpanjangsewaa());
+
+        view.findViewById(R.id.mnbayar).setOnClickListener(v -> openPembayaranFragment());
+
+        view.findViewById(R.id.mntagihan).setOnClickListener(v -> openPembayaranFragment());
+
         return view;
     }
 
@@ -69,6 +77,18 @@ public class Penyewa extends Fragment {
         Fragment fragment = new info_sewa();
         navigateToFragment(fragment);
     }
+
+    private void openkodejoin() {
+        Fragment fragment = new join_kost();
+        navigateToFragment(fragment);
+    }
+
+    private void openperpanjangsewaa() {
+        Intent intent = new Intent(getActivity(), navigasi_pengajuan.class);
+        intent.putExtra("default_fragment", "sewa");
+        startActivity(intent);
+    }
+
 
     // Helper method untuk navigasi fragment
     private void navigateToFragment(Fragment fragment) {

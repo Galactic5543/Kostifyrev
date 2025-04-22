@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigasi_info_kost"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".navigasi_info_kost">
+    android:background="@color/white"
+    tools:context=".nav_list_penyewa">
 
     <RelativeLayout
         android:id="@+id/kontainermenutop"
@@ -29,7 +30,7 @@
             android:id="@+id/textmenuinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Informasi Kost"
+            android:text="Penyewa"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
             android:textSize="25sp"
@@ -40,20 +41,44 @@
 
 
 
+
+
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/kontainermenutop"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/backgroundedittextstroke1radius15"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="20dp"
+        android:hint="Search"
+        android:padding="2dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/abu"
+        android:textSize="15sp" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/topnav"
-        android:layout_below="@id/kontainermenutop"
+        android:layout_below="@id/search"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:layout_marginHorizontal="15dp"
         android:background="@drawable/bg_round20dp"
-        app:menu="@menu/menu_info_kost"
+        app:menu="@menu/menu_penyewa"
         app:itemTextColor="@color/nav_item_color_putih"
         app:itemBackground="@drawable/bg_nav_ol"
         app:itemTextAppearanceActive="@style/BottomNavTextNormal"
         app:itemTextAppearanceInactive="@style/BottomNavTextActive"
         android:layout_centerHorizontal="true"
         />
+
 
     <View
         android:id="@+id/garis"
@@ -63,12 +88,15 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/garis" />
 
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/garis"
+
         />
+
 
 
 

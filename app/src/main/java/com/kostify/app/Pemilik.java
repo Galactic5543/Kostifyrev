@@ -68,6 +68,8 @@ public class Pemilik extends Fragment {
         // Navigasi ke Pembayaran
         view.findViewById(R.id.mnpengumuman).setOnClickListener(v -> openpengumuman());
 
+        view.findViewById(R.id.btndetailpenyewa).setOnClickListener(v -> openlistpenyewa());
+
         return view;
     }
 
@@ -82,14 +84,19 @@ public class Pemilik extends Fragment {
     }
 
     private void openpenyewa() {
-        Fragment fragment = new list_penyewa();
-        navigateToFragment(fragment);
+        Intent intent = new Intent(getActivity(), nav_list_penyewa.class);
+        startActivity(intent);
     }
 
 
     private void openpengumuman() {
         Fragment fragment = new pengumuman();
         navigateToFragment(fragment);
+    }
+
+    private void openlistpenyewa() {
+        Intent intent = new Intent(getActivity(), nav_list_penyewa.class);
+        startActivity(intent);
     }
 
 

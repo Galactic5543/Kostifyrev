@@ -41,12 +41,7 @@ public class OTP extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         otpFields = new EditText[]{
-                findViewById(R.id.txtotp1),
-                findViewById(R.id.txtotp2),
-                findViewById(R.id.txtotp3),
-                findViewById(R.id.txtotp4),
-                findViewById(R.id.txtotp5),
-                findViewById(R.id.txtotp6)
+                findViewById(R.id.txtotp),
         };
 
         btnVerifikasi = findViewById(R.id.btnkonfirmasi);

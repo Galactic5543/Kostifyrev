@@ -22,14 +22,22 @@ public class navigasi_pengajuan extends AppCompatActivity {
         binding = ActivityNavigasiPengajuanBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Inisialisasi TextView untuk judul
         textMenuInfo = findViewById(R.id.textmenuinfo);
 
-        // Set default fragment
-        replaceFragment(new pengajuan_kerusakan(), false);
-        updateinfomenu("Kerusakan");
+        // Cek data intent apakah ingin langsung buka pengajuan_sewa
+        String defaultFragment = getIntent().getStringExtra("default_fragment");
 
-        // Pantau perubahan di backstack (optional)
+        if ("sewa".equals(defaultFragment)) {
+            replaceFragment(new pengajuan_sewa(), false);
+            updateinfomenu("Sewa");
+            binding.topnav.setSelectedItemId(R.id.sewa); // Tandai menu sewa
+        } else {
+            replaceFragment(new pengajuan_kerusakan(), false);
+            updateinfomenu("Kerusakan");
+            binding.topnav.setSelectedItemId(R.id.kerusakan);
+        }
+
+        // Listener untuk perubahan backstack
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frameLayout);
             updateUIVisibility(currentFragment);
@@ -52,12 +60,10 @@ public class navigasi_pengajuan extends AppCompatActivity {
             return false;
         });
 
-        // Tombol kembali ke fragment Penyewa
+        // Tombol kembali
         binding.icBack.setOnClickListener(v -> {
-            // Tutup activity saat ini untuk kembali ke menu utama
-            finish();
+            finish(); // Tutup activity ini
         });
-
     }
 
     public void replaceFragment(Fragment fragment, boolean addToBackStack) {
@@ -70,24 +76,17 @@ public class navigasi_pengajuan extends AppCompatActivity {
         }
 
         fragmentTransaction.commit();
-
-        // Perbarui tampilan UI berdasarkan fragment aktif
         updateUIVisibility(fragment);
     }
 
     private void updateUIVisibility(Fragment fragment) {
-        // Update top menu visibility
         View topMenu = findViewById(R.id.kontainermenutop);
+
         if (fragment instanceof pengajuan_kerusakan || fragment instanceof pengajuan_sewa) {
             topMenu.setVisibility(View.VISIBLE);
-        } else {
-            topMenu.setVisibility(View.GONE);
-        }
-
-        // Update bottom navigation visibility
-        if (fragment instanceof  pengajuan_kerusakan || fragment instanceof pengajuan_sewa) {
             binding.topnav.setVisibility(View.VISIBLE);
         } else {
+            topMenu.setVisibility(View.GONE);
             binding.topnav.setVisibility(View.GONE);
         }
     }
