@@ -5,10 +5,34 @@
     android:layout_height="match_parent"
     tools:context=".pembayaran">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <RelativeLayout
+        android:id="@+id/kontainermenutop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="pembayaran" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:adjustViewBounds="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/textmenuinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pembayaran"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/warna10"/>
+    </RelativeLayout>
 
 </FrameLayout>

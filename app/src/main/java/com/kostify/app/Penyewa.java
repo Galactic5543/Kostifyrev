@@ -34,6 +34,8 @@ public class Penyewa extends Fragment {
         // Navigasi ke Pembayaran
         view.findViewById(R.id.mn_pembayaran).setOnClickListener(v -> openPembayaranFragment());
 
+        view.findViewById(R.id.btndetailsewa).setOnClickListener(v -> opendetailsewa());
+
         return view;
     }
 
@@ -60,6 +62,11 @@ public class Penyewa extends Fragment {
 
     private void openPembayaranFragment() {
         Fragment fragment = new pembayaran();
+        navigateToFragment(fragment);
+    }
+
+    private void opendetailsewa() {
+        Fragment fragment = new info_sewa();
         navigateToFragment(fragment);
     }
 

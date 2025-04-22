@@ -1,5 +1,6 @@
 package com.kostify.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class Pemilik extends Fragment {
 
@@ -42,22 +44,60 @@ public class Pemilik extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate layout fragment_pemilik
         View view = inflater.inflate(R.layout.fragment_pemilik, container, false);
 
         // Inisialisasi Spinner
         Spinner gantikost = view.findViewById(R.id.gantikost);
-
-        // Buat adapter dari array di strings.xml
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.list_kost,
                 android.R.layout.simple_spinner_item
         );
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gantikost.setAdapter(adapter);
 
+        // Navigasi ke Informasi Kost
+        view.findViewById(R.id.mntambahkost).setOnClickListener(v -> opentambahkost());
+
+        // Navigasi ke Sosial
+        view.findViewById(R.id.mninfokost).setOnClickListener(v -> openinfokost());
+
+        // Navigasi ke pengajuan_kerusakan
+        view.findViewById(R.id.mnpenyewa).setOnClickListener(v -> openpenyewa());
+
+        // Navigasi ke Pembayaran
+        view.findViewById(R.id.mnpengumuman).setOnClickListener(v -> openpengumuman());
+
         return view;
+    }
+
+    private void opentambahkost() {
+        Fragment fragment = new tambah_kost();
+        navigateToFragment(fragment);
+    }
+
+    private void openinfokost() {
+        Intent intent = new Intent(getActivity(), navigasi_info_kost.class);
+        startActivity(intent);
+    }
+
+    private void openpenyewa() {
+        Fragment fragment = new list_penyewa();
+        navigateToFragment(fragment);
+    }
+
+
+    private void openpengumuman() {
+        Fragment fragment = new pengumuman();
+        navigateToFragment(fragment);
+    }
+
+
+    // Helper method untuk navigasi fragment
+    private void navigateToFragment(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayout, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

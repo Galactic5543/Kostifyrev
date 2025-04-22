@@ -1,15 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".pengajuan_kerusakan"
     android:background="#F4F4F4">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="pengajuankerusakan" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+
+            <TextView
+                android:id="@+id/textjeniskerusakan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis Kerusakan"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/warna10"
+                android:layout_marginTop="16dp"/>
+
+            <Spinner
+                android:id="@+id/dropdownkerusakan"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@drawable/backgroundedittextstroke1radius15"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/textdeskripsikerusakan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deskripsi Kerusakan"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/warna10"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/textperaturan"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:lineSpacingMultiplier="1.5"
+                android:background="@drawable/backgroundedittextstroke1radius15"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:maxLines="5"
+                android:gravity="top|start" />
+
+            <TextView
+                android:id="@+id/textpanduanperaturan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Panduan Pengisian Deskripsi Kerusakan"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/warna10"
+                android:layout_marginTop="20dp"/>
+
+            <!-- Daftar peraturan -->
+            <TextView
+                android:id="@+id/peraturan1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.) Sebutkan lokasi atau kamar secara lengkap"
+                android:textColor="@color/warna10"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/peraturan2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2.) Jika bisa, tambahkan waktu kejadian"
+                android:textColor="@color/warna10"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/peraturan3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3.) Hindari deskripsi yang terlalu singkat"
+                android:textColor="@color/warna10"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/peraturan4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.) Jelaskan kondisi kerusakan secara singkat tapi informatif"
+                android:textColor="@color/warna10"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/peraturan5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.) Gunakan bahasa yang sopan dan mudah dipahami"
+                android:textColor="@color/warna10"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/peraturan6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6.) Hindari singkatan atau kata-kata yang membingungkan."
+                android:textColor="@color/warna10"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"/>
+
+            <Button
+                android:id="@+id/btnajukankerusakan"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Ajukan Kerusakan"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/backgroundbutton"
+                android:backgroundTint="@color/warna7"
+                android:layout_marginHorizontal="30dp"
+                android:textSize="14sp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

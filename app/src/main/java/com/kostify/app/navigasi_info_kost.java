@@ -9,25 +9,25 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.kostify.app.databinding.ActivityNavigasiPengajuanBinding;
+import com.kostify.app.databinding.ActivityNavigasiInfoKostBinding;
 
-public class navigasi_pengajuan extends AppCompatActivity {
+public class navigasi_info_kost extends AppCompatActivity {
 
-    ActivityNavigasiPengajuanBinding binding;
+    ActivityNavigasiInfoKostBinding binding;
     TextView textMenuInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityNavigasiPengajuanBinding.inflate(getLayoutInflater());
+        binding = ActivityNavigasiInfoKostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Inisialisasi TextView untuk judul
         textMenuInfo = findViewById(R.id.textmenuinfo);
 
-        // Set default fragment
-        replaceFragment(new pengajuan_kerusakan(), false);
-        updateinfomenu("Kerusakan");
+        // Ganti fragment pertama yang muncul
+        replaceFragment(new info_kost(), false);
+        updateinfomenu("Info Kost");
 
         // Pantau perubahan di backstack (optional)
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
@@ -39,13 +39,13 @@ public class navigasi_pengajuan extends AppCompatActivity {
         binding.topnav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
-            if (itemId == R.id.kerusakan) {
-                replaceFragment(new pengajuan_kerusakan(), false);
-                updateinfomenu("Kerusakan");
+            if (itemId == R.id.navinfokost) {
+                replaceFragment(new info_kost(), false);
+                updateinfomenu("Info Kost");
                 return true;
-            } else if (itemId == R.id.sewa) {
-                replaceFragment(new pengajuan_sewa(), false);
-                updateinfomenu("Sewa");
+            } else if (itemId == R.id.naveditkost) {
+                replaceFragment(new edit_kost(), false);
+                updateinfomenu("Edit Kost");
                 return true;
             }
 
@@ -78,17 +78,21 @@ public class navigasi_pengajuan extends AppCompatActivity {
     private void updateUIVisibility(Fragment fragment) {
         // Update top menu visibility
         View topMenu = findViewById(R.id.kontainermenutop);
-        if (fragment instanceof pengajuan_kerusakan || fragment instanceof pengajuan_sewa) {
-            topMenu.setVisibility(View.VISIBLE);
-        } else {
-            topMenu.setVisibility(View.GONE);
+        if (topMenu != null) {
+            if (fragment instanceof info_kost || fragment instanceof edit_kost) {
+                topMenu.setVisibility(View.VISIBLE);
+            } else {
+                topMenu.setVisibility(View.GONE);
+            }
         }
 
         // Update bottom navigation visibility
-        if (fragment instanceof  pengajuan_kerusakan || fragment instanceof pengajuan_sewa) {
-            binding.topnav.setVisibility(View.VISIBLE);
-        } else {
-            binding.topnav.setVisibility(View.GONE);
+        if (binding.topnav != null) {
+            if (fragment instanceof info_kost || fragment instanceof edit_kost) {
+                binding.topnav.setVisibility(View.VISIBLE);
+            } else {
+                binding.topnav.setVisibility(View.GONE);
+            }
         }
     }
 

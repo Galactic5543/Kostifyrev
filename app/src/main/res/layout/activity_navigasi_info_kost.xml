@@ -2,12 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigasi_pengajuan"
+    android:id="@+id/navigasi_info_kost"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".navigasi_pengajuan"
-    android:background="#F4F4F4">
-
+    tools:context=".navigasi_info_kost">
 
     <RelativeLayout
         android:id="@+id/kontainermenutop"
@@ -49,7 +47,7 @@
         android:layout_height="40dp"
         android:layout_marginHorizontal="15dp"
         android:background="@drawable/bg_round20dp"
-        app:menu="@menu/menu_pengajuan"
+        app:menu="@menu/menu_info_kost"
         app:itemTextColor="@color/nav_item_color_putih"
         app:itemBackground="@drawable/bg_nav_ol"
         app:itemTextAppearanceActive="@style/BottomNavTextNormal"
@@ -65,17 +63,12 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/garis" />
 
-
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/garis"
-
         />
-
-
-
 
 
 

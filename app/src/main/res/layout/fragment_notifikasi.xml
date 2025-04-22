@@ -37,7 +37,7 @@
         android:text="Notifikasi"
         android:textSize="29sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/warna10"
         android:layout_marginTop="10dp"
      android:layout_centerHorizontal="true" />
 

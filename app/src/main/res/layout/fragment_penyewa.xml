@@ -38,7 +38,20 @@
             android:layout_marginStart="5dp"
             android:textColor="@color/warna10" />
 
-        <!-- Search EditText -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profileImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/profil"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+
+    style="@style/ImageViewMaskStyle" />
+
+
+    <!-- Search EditText -->
         <EditText
             android:id="@+id/search"
             android:layout_width="match_parent"

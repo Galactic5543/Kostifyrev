@@ -1,9 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pengajuan_sewa">
+    tools:context=".pengajuan_sewa"
+    android:background="#f4f4f4">
 
 
-</FrameLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+
+    <TextView
+        android:id="@+id/namakost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kost Melati"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/warna10"/>
+
+    <TextView
+        android:id="@+id/kamar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/namakost"
+        android:text="Kamar A1"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/warna10"/>
+
+    <TextView
+        android:id="@+id/tenggat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kamar"
+        android:text="Hingga 20/5/2025"
+        android:textSize="11sp"
+        android:textColor="@color/warna10"/>
+
+    <TextView
+        android:id="@+id/hari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kamar"
+        android:layout_alignParentEnd="true"
+        android:text="30 Hari"
+        android:textStyle="bold"
+        android:textColor="@color/warna10"
+        android:textSize="11sp"/>
+
+    <ProgressBar
+        android:id="@+id/progressewa"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_below="@+id/tenggat"
+        android:layout_marginTop="5dp"
+        android:max="30"
+        />
+
+
+    <TextView
+        android:id="@+id/textdurasiperpanjangan"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/progressewa"
+        android:layout_height="wrap_content"
+        android:text="Durasi Perpanjangan"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/warna10"
+        android:layout_marginTop="16dp"/>
+
+    <Spinner
+        android:id="@+id/dropdownperpanjangan"
+        android:layout_below="@+id/textdurasiperpanjangan"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/backgroundedittextstroke1radius15"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/textalasanperpanjangan"
+        android:layout_below="@+id/dropdownperpanjangan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alasan Perpanjangan"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/warna10"
+        android:layout_marginTop="1dp"/>
+
+
+        <TextView
+            android:id="@+id/captionopsional"
+            android:layout_below="@id/dropdownperpanjangan"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*opsional"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/warna10"
+            android:textSize="14sp"/>
+
+
+
+    <EditText
+        android:id="@+id/txtalasanperpanjangan"
+        android:layout_below="@id/textalasanperpanjangan"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_height="100dp"
+        android:padding="10dp"
+        android:lineSpacingMultiplier="1.5"
+        android:background="@drawable/backgroundedittextstroke1radius15"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        android:maxLines="5"
+        android:gravity="top|start" />
+
+
+    <TextView
+        android:id="@+id/caption1"
+        android:layout_below="@id/txtalasanperpanjangan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anda akan menerima pemberitahuan jika pengajuan Anda disetujui"
+        android:textColor="@color/warna10"
+        android:textSize="14sp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/caption2"
+        android:layout_below="@id/caption1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Proses persetujuan bisa memakan waktu beberapa saat, harap bersabar."
+        android:textColor="@color/warna10"
+        android:textSize="14sp"
+        android:layout_marginTop="15dp"/>
+
+    <Button
+        android:id="@+id/btnajukanperpanjangansewa"
+        android:layout_below="@id/caption2"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Ajukan Kerusakan"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/backgroundbutton"
+        android:backgroundTint="@color/warna7"
+        android:layout_marginHorizontal="30dp"
+        android:textSize="14sp"
+        android:textColor="@color/white" />
+
+    </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

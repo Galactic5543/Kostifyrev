@@ -1,14 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".info_sewa">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="info sewa" />
 
-</FrameLayout>
+    <RelativeLayout
+        android:id="@+id/kontainermenutop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:adjustViewBounds="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/textinformasikost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Informasi Kost"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/warna10"/>
+    </RelativeLayout>
+
+
+
+
+        <TextView
+            android:layout_below="@+id/kontainermenutop"
+            android:id="@+id/namakost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kost Melati"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/warna10"/>
+
+        <TextView
+            android:id="@+id/kamar"
+            android:layout_marginHorizontal="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/namakost"
+            android:text="Kamar A1"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/warna10"/>
+
+        <TextView
+            android:id="@+id/tenggat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kamar"
+            android:layout_marginHorizontal="15dp"
+            android:text="Sisa Waktu Sewa"
+            android:textSize="14sp"
+            android:textColor="@color/warna10"/>
+
+        <TextView
+            android:id="@+id/hari"
+            android:layout_marginHorizontal="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kamar"
+            android:layout_alignParentEnd="true"
+            android:text="30 Hari"
+            android:textStyle="bold"
+            android:textColor="@color/warna10"
+            android:textSize="14sp"/>
+
+        <ProgressBar
+            android:id="@+id/progressewa"
+            android:layout_marginHorizontal="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_below="@+id/tenggat"
+            android:layout_marginTop="5dp"
+            android:max="30"
+            />
+
+        <TextView
+            android:id="@+id/textstatussewa"
+            android:layout_marginHorizontal="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progressewa"
+            android:text="Status Sewa : Penghuni Aktif"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/warna10"/>
+
+        <TextView
+            android:id="@+id/texttenggat"
+            android:layout_width="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textstatussewa"
+            android:text="Hingga 3/20/2025"
+            android:textSize="14sp"
+            android:textColor="@color/warna10"/>
+
+        <TextView
+            android:id="@+id/texthargasewa"
+            android:layout_marginHorizontal="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/texttenggat"
+            android:text="Harga Sewa / Bulan : RP.1.500.000"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/warna10"/>
+
+
+        <View
+            android:id="@+id/garis"
+            android:layout_marginHorizontal="15dp"
+            android:layout_below="@id/texthargasewa"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/garis" />
+
+
+        <TextView
+            android:id="@+id/textpenyewa"
+            android:layout_marginHorizontal="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/garis"
+            android:layout_marginTop="8dp"
+            android:text="Penyewa : Fajar Nugroho"
+            android:textSize="14sp"
+            android:textColor="@color/warna10"/>
+
+        <TextView
+            android:id="@+id/textnowhatsapp"
+            android:layout_width="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textpenyewa"
+            android:text="No.Whatsapp : 085283752194"
+            android:textSize="14sp"
+            android:textColor="@color/warna10"/>
+
+    </RelativeLayout>

@@ -40,6 +40,16 @@
         android:layout_marginStart="5dp"
         android:textColor="@color/warna10" />
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profileImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/profil"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"/>
+
     <!-- Search EditText -->
     <EditText
         android:id="@+id/search"
@@ -89,7 +99,7 @@
             android:layout_below="@id/namakost"
             android:text="Jl. Mahesa, Dusun II Karangrau, Karangrau, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah"
             android:textColor="@color/warna10"
-            android:textSize="14sp"
+            android:textSize="11sp"
             android:textStyle="normal"
             />
 
@@ -223,6 +233,7 @@ android:layout_marginTop="10dp"
 
         <!-- ===================== INFO KOST ===================== -->
         <RelativeLayout
+            android:id="@+id/mntambahkost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -277,6 +288,7 @@ android:layout_marginTop="10dp"
 
         <!-- ===================== PENGAJUAN ===================== -->
         <RelativeLayout
+            android:id="@+id/mninfokost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -330,8 +342,9 @@ android:layout_marginTop="10dp"
             android:layout_height="1dp"
             android:background="@drawable/garis" />
 
-        <!-- ===================== SOSIAL ===================== -->
+        <!-- ===================== Penyewa ===================== -->
         <RelativeLayout
+            android:id="@+id/mnpenyewa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -387,6 +400,7 @@ android:layout_marginTop="10dp"
 
         <!-- ===================== INFO SEWA ===================== -->
         <RelativeLayout
+            android:id="@+id/mnpengumuman"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -409,7 +423,7 @@ android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/ic_pengumuman"
                 android:layout_marginStart="8dp"
-                android:text="Info Sewa"
+                android:text="Pengumuman"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/warna10" />
