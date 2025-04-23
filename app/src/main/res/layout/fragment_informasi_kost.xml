@@ -39,7 +39,7 @@
         android:layout_below="@+id/kontainermenutop"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/bgradius5"
+        android:src="@drawable/bgradius15"
         android:layout_marginTop="15dp"
         android:layout_marginHorizontal="15dp"/>
 
@@ -134,7 +134,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_below="@id/textlinkgrupwhatsapp"
-        android:text="Pemilik : Fajar Nugroho"
+        android:text="https://chat.whatsapp.com/Cnjxns5XKIL1s6gLnLrclg"
         android:textColor="@color/warna10"
         android:textSize="14sp"
         android:textStyle="normal"

@@ -33,7 +33,7 @@ public class nav_list_penyewa extends AppCompatActivity {
 
         // Ganti fragment pertama yang muncul
         replaceFragment(new list_penyewa(), false);
-        updateinfomenu("Info Kost");
+        updateinfomenu("List Penyewa");
 
         // Pantau perubahan di backstack (optional)
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {

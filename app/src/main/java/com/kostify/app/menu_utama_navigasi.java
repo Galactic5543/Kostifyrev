@@ -2,6 +2,7 @@ package com.kostify.app;
 
 import android.os.Bundle;
 import android.view.View;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -20,8 +21,14 @@ public class menu_utama_navigasi extends AppCompatActivity {
         binding = ActivityNavigasiUtamaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Set default fragment
-        replaceFragment(new Notifikasi(), false);
+        // Ambil data fragment tujuan dari Intent
+        String fragmentTujuan = getIntent().getStringExtra("fragment");
+        if ("penyewa".equals(fragmentTujuan)) {
+            replaceFragment(new Penyewa(), false);
+            binding.bottomNav.setSelectedItemId(R.id.penyewa); // opsional untuk highlight menu
+        } else {
+            replaceFragment(new Notifikasi(), false); // default fragment
+        }
 
         // Pantau perubahan di backstack
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Kostifyrev"
         tools:targetApi="31">
         <activity
+            android:name=".navigasi_pembayaran"
+            android:exported="false" />
+        <activity
             android:name=".nav_list_penyewa"
             android:exported="false" />
         <activity

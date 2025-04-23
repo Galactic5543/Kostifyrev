@@ -7,4 +7,304 @@
     android:background="#F4F4F4"
     tools:context=".Profil">
 
+
+    <RelativeLayout
+        android:id="@+id/kontainermenutop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top"
+        android:padding="10dp">
+
+
+        <TextView
+            android:id="@+id/textinformasikost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profil &amp; Pengaturan"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/warna10"/>
+    </RelativeLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profileImage"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_below="@id/kontainermenutop"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="15dp"
+        android:src="@drawable/profil"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        style="@style/ImageViewMaskStyle" />
+
+    <TextView
+        android:layout_below="@+id/profileImage"
+        android:id="@+id/namauser"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:text="Fajar Nugroho"
+        android:layout_marginHorizontal="15dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/warna10"/>
+
+    <TextView
+        android:layout_below="@+id/namauser"
+        android:id="@+id/nowhatsapp"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:text="085384952193"
+        android:layout_marginHorizontal="15dp"
+        android:textSize="15sp"
+        android:textColor="@color/warna10"/>
+
+
+
+    <ScrollView
+        android:layout_below="@id/nowhatsapp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:layout_below="@+id/textdashboardpenyewa">
+
+            <!-- ===================== INFO KOST ===================== -->
+            <RelativeLayout
+                android:id="@+id/mn_info_kost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <ImageView
+                    android:id="@+id/ic_infokost"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_akun"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+
+                <TextView
+                    android:id="@+id/textmenuakun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/ic_infokost"
+                    android:layout_marginStart="8dp"
+                    android:layout_centerInParent="true"
+                    android:text="Akun"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/warna10" />
+
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/arrow"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+            </RelativeLayout>
+
+            <!-- Garis pemisah -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/garis" />
+
+            <!-- ===================== pengajuan_kerusakan ===================== -->
+            <RelativeLayout
+                android:id="@+id/mn_pengajuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:elevation="2dp">
+
+                <ImageView
+                    android:id="@+id/ic_pengajuan"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_norifikasi"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+
+                <TextView
+                    android:id="@+id/textmenunotifikasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/ic_pengajuan"
+                    android:layout_marginStart="8dp"
+                    android:layout_centerInParent="true"
+                    android:text="Notifikasi"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/warna10" />
+
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/arrow"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+            </RelativeLayout>
+
+            <!-- Garis pemisah -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/garis" />
+
+            <!-- ===================== SOSIAL ===================== -->
+            <RelativeLayout
+                android:id="@+id/mn_sosial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:elevation="2dp">
+
+                <ImageView
+                    android:id="@+id/ic_sosial"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_metodepembayaran"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+
+                <TextView
+                    android:id="@+id/textmenumetodepembayaran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/ic_sosial"
+                    android:layout_marginStart="8dp"
+                    android:text="Metode Pembayaran"
+                    android:textSize="16sp"
+                    android:layout_centerInParent="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/warna10" />
+
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/arrow"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+            </RelativeLayout>
+
+            <!-- Garis pemisah -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/garis" />
+
+            <!-- ===================== INFO SEWA ===================== -->
+            <RelativeLayout
+                android:id="@+id/mn_info_sewa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:elevation="2dp">
+
+                <ImageView
+                    android:id="@+id/ic_infosewa"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_tentangaplikasi"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+
+                <TextView
+                    android:id="@+id/textmenutentangaplikasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/ic_infosewa"
+                    android:layout_marginStart="8dp"
+                    android:text="Tentang Aplikasi"
+                    android:layout_centerInParent="true"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/warna10" />
+
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/arrow"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+            </RelativeLayout>
+
+            <!-- Garis pemisah -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/garis" />
+
+            <!-- ===================== PEMBAYARAN ===================== -->
+            <RelativeLayout
+                android:id="@+id/mn_pembayaran"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:elevation="2dp">
+
+                <ImageView
+                    android:id="@+id/ic_pembayaran"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_logout"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+
+                <TextView
+                    android:id="@+id/textmenulogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/ic_pembayaran"
+                    android:layout_marginStart="8dp"
+                    android:text="Logout"
+                    android:textSize="16sp"
+                    android:layout_centerInParent="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/warna10" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
 </RelativeLayout>

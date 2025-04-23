@@ -17,12 +17,22 @@ public class join_kost extends Fragment {
         View view = inflater.inflate(R.layout.fragment_join_kost, container, false);
 
         view.findViewById(R.id.btnkonfirmasi).setOnClickListener(v -> opennotifikasi());
+        view.findViewById(R.id.btnkembali).setOnClickListener(v -> openpenyewa());
 
         return view;
+
+
     }
 
     private void opennotifikasi() {
         Intent intent = new Intent(getActivity(), menu_utama_navigasi.class);
         startActivity(intent);
     }
+
+    private void openpenyewa() {
+        Intent intent = new Intent(getActivity(), menu_utama_navigasi.class);
+        intent.putExtra("fragment", "penyewa");
+        startActivity(intent);
+    }
+
 }

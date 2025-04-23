@@ -32,7 +32,7 @@ public class Penyewa extends Fragment {
         view.findViewById(R.id.mn_info_sewa).setOnClickListener(v -> openInfoSewaFragment());
 
         // Navigasi ke Pembayaran
-        view.findViewById(R.id.mn_pembayaran).setOnClickListener(v -> openPembayaranFragment());
+        view.findViewById(R.id.mn_pembayaran).setOnClickListener(v -> opentagihan());
 
         view.findViewById(R.id.btndetailsewa).setOnClickListener(v -> opendetailsewa());
 
@@ -40,9 +40,8 @@ public class Penyewa extends Fragment {
 
         view.findViewById(R.id.mnperpanjangsewa).setOnClickListener(v -> openperpanjangsewaa());
 
-        view.findViewById(R.id.mnbayar).setOnClickListener(v -> openPembayaranFragment());
 
-        view.findViewById(R.id.mntagihan).setOnClickListener(v -> openPembayaranFragment());
+        view.findViewById(R.id.mnriwayattagihan).setOnClickListener(v -> openriwayattagihan());
 
         return view;
     }
@@ -68,9 +67,9 @@ public class Penyewa extends Fragment {
         navigateToFragment(fragment);
     }
 
-    private void openPembayaranFragment() {
-        Fragment fragment = new pembayaran();
-        navigateToFragment(fragment);
+    private void opentagihan() {
+        Intent intent = new Intent(getActivity(), navigasi_pembayaran.class);
+        startActivity(intent);
     }
 
     private void opendetailsewa() {
@@ -86,6 +85,12 @@ public class Penyewa extends Fragment {
     private void openperpanjangsewaa() {
         Intent intent = new Intent(getActivity(), navigasi_pengajuan.class);
         intent.putExtra("default_fragment", "sewa");
+        startActivity(intent);
+    }
+
+    private void openriwayattagihan() {
+        Intent intent = new Intent(getActivity(), navigasi_pembayaran.class);
+        intent.putExtra("default_fragment", "Riwayat");
         startActivity(intent);
     }
 

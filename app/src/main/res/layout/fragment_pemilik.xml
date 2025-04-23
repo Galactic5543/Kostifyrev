@@ -76,7 +76,7 @@
         android:id="@+id/kontainerinfosewa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bgradius5"
+        android:background="@drawable/bgradius15"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="15dp"
         android:layout_below="@id/search"
@@ -164,59 +164,15 @@ android:layout_marginTop="10dp"
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textaksescepat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Akses Cepat"
-        android:layout_below="@id/kontainerinfosewa"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="10dp"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:textColor="@color/warna10"/>
-
-    <LinearLayout
-        android:id="@+id/kontaineraksescepat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_below="@+id/textaksescepat"
-        >
-        <ImageView
-            android:layout_width="59dp"
-            android:layout_height="59dp"
-            android:background="@color/warna10"
-            android:layout_margin="5dp"/>
-
-
-        <ImageView
-            android:layout_width="59dp"
-            android:layout_height="59dp"
-            android:layout_margin="5dp"
-            android:background="@color/warna10"/>
-
-        <ImageView
-            android:layout_width="59dp"
-            android:layout_height="59dp"
-            android:layout_margin="5dp"
-            android:background="@color/warna10"/>
-
-        <ImageView
-            android:layout_width="59dp"
-            android:layout_height="59dp"
-            android:layout_margin="5dp"
-            android:background="@color/warna10"/>
-    </LinearLayout>
 
     <TextView
         android:id="@+id/textdashboardpenyewa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dashboard Penyewa"
-        android:layout_below="@id/kontaineraksescepat"
+        android:layout_below="@id/kontainerinfosewa"
         android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
         android:textSize="15sp"
         android:textStyle="bold"
