@@ -78,9 +78,9 @@
             android:paddingHorizontal="10dp"
             android:layout_below="@+id/textdashboardpenyewa">
 
-            <!-- ===================== INFO KOST ===================== -->
+            <!-- ===================== Akun ===================== -->
             <RelativeLayout
-                android:id="@+id/mn_info_kost"
+                android:id="@+id/mnakun"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -125,9 +125,9 @@
                 android:layout_height="1dp"
                 android:background="@drawable/garis" />
 
-            <!-- ===================== pengajuan_kerusakan ===================== -->
+            <!-- ===================== Notifikasi ===================== -->
             <RelativeLayout
-                android:id="@+id/mn_pengajuan"
+                android:id="@+id/mnnotifikasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -173,9 +173,9 @@
                 android:layout_height="1dp"
                 android:background="@drawable/garis" />
 
-            <!-- ===================== SOSIAL ===================== -->
+            <!-- ===================== Metode Pembayaran ===================== -->
             <RelativeLayout
-                android:id="@+id/mn_sosial"
+                android:id="@+id/mnmetodepembayaran"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -221,9 +221,9 @@
                 android:layout_height="1dp"
                 android:background="@drawable/garis" />
 
-            <!-- ===================== INFO SEWA ===================== -->
+            <!-- ===================== tentang aplikasi SEWA ===================== -->
             <RelativeLayout
-                android:id="@+id/mn_info_sewa"
+                android:id="@+id/mntentangaplikasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -269,9 +269,9 @@
                 android:layout_height="1dp"
                 android:background="@drawable/garis" />
 
-            <!-- ===================== PEMBAYARAN ===================== -->
+            <!-- ===================== logout ===================== -->
             <RelativeLayout
-                android:id="@+id/mn_pembayaran"
+                android:id="@+id/mnlogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"

@@ -26,11 +26,15 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
+    private SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
+
+        sessionManager = new SessionManager(this);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -78,20 +82,26 @@ public class Login extends AppCompatActivity {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success
+                        String email = mAuth.getCurrentUser().getEmail();
+                        sessionManager.createLoginSession(email); // SIMPAN SESSION
+
                         Intent intent = new Intent(Login.this, menu_utama_navigasi.class);
                         startActivity(intent);
                         finish();
-                    } else {
-                        // If sign in fails
-                        Toast.makeText(Login.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     @Override
     protected void onStart() {
-        super.onStart();
+        super.onStart(); // ✅ Panggil super.onStart() terlebih dahulu
+
+        if (sessionManager.isLoggedIn()) {
+            startActivity(new Intent(Login.this, menu_utama_navigasi.class));
+            finish();
+            return;
+        }
+
         if (mAuth.getCurrentUser() != null) {
             // Tambahkan pengecekan status verifikasi OTP
             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -118,7 +128,6 @@ public class Login extends AppCompatActivity {
                     });
         }
     }
-
 
     public void notifikasi(View view) {
         Intent intent = new Intent(Login.this, menu_utama_navigasi.class);
