@@ -27,10 +27,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registrasi"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
-        android:textSize="29sp"
+        android:textSize="37sp"
         android:textStyle="bold"
         android:textColor="@color/black"/>
 
@@ -56,6 +56,10 @@
         android:layout_height="40dp"
         android:layout_below="@+id/txtnama"
         android:layout_centerHorizontal="true"
+        android:inputType="textEmailAddress"
+        android:autofillHints="email"
+        android:importantForAutofill="yes"
+        android:completionThreshold="1"
         android:background="@drawable/backgroundedittextstroke1radius15"
         android:layout_margin="15dp"
         android:padding="2dp"
@@ -79,6 +83,8 @@
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:textColor="@color/black"
+        android:inputType="textPassword"
+        android:autofillHints="password"
         android:hint="Password"
         android:textSize="15sp"
         android:textColorHint="@color/abu"/>
@@ -100,24 +106,35 @@
         android:textColorHint="@color/abu"/>
 
     <Button
-        android:id="@+id/btndaftar"
+        android:id="@+id/btnVerifikasiLink"
         android:layout_width="287dp"
         android:layout_height="53dp"
         android:layout_below="@+id/txtwhatsapp"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:background="@drawable/backgroundbutton"
-        android:text="Daftar"
-        android:textSize="14sp"
+        android:text="Verifikasi Link Email"
         android:textColor="@color/white"
-        />
+        android:textSize="14sp"/>
 
+    <Button
+        android:id="@+id/btnPilihOtp"
+        android:layout_width="287dp"
+        android:layout_height="53dp"
+        android:layout_below="@+id/btnVerifikasiLink"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/backgroundbutton"
+        android:text="Verifikasi OTP"
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
 
     <LinearLayout
         android:id="@+id/layout_belum_punya_akun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btndaftar"
+        android:layout_margin="5dp"
+        android:layout_below="@id/btnPilihOtp"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
         >
@@ -140,4 +157,6 @@
             android:textColor="@color/warna10"
             android:onClick="login"/>
     </LinearLayout>
+
+
 </RelativeLayout>

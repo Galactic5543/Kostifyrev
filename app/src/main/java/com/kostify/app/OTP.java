@@ -39,6 +39,7 @@ public class OTP extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        verificationId = getIntent().getStringExtra("verificationId");
 
         otpFields = new EditText[]{
                 findViewById(R.id.txtotp1),
@@ -175,15 +176,51 @@ public class OTP extends AppCompatActivity {
         }
     }
 
-    private String getEnteredOTP() {
-        StringBuilder sb = new StringBuilder();
-        for (EditText field : otpFields) {
-            sb.append(field.getText().toString());
+    public void verifyOTP(View view) {
+        String enteredOTP = getEnteredOTP(); // Ambil OTP dari input
+
+        if (verificationId != null) {
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, enteredOTP);
+            signInWithPhoneAuthCredential(credential);
         }
-        return sb.toString();
     }
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Verifikasi berhasil!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(this, menu_utama_navigasi.class));
+                        finish();
+                    } else {
+                        Toast.makeText(this, "OTP salah!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private String getEnteredOTP() {
+        EditText otp1 = findViewById(R.id.txtotp1);
+        EditText otp2 = findViewById(R.id.txtotp2);
+        EditText otp3 = findViewById(R.id.txtotp3);
+        EditText otp4 = findViewById(R.id.txtotp4);
+        EditText otp5 = findViewById(R.id.txtotp5);
+        EditText otp6 = findViewById(R.id.txtotp6);
+
+        return otp1.getText().toString() +
+                otp2.getText().toString() +
+                otp3.getText().toString() +
+                otp4.getText().toString() +
+                otp5.getText().toString() +
+                otp6.getText().toString();
+    }
+
 
     public void Navigasi(View view) {
         startActivity(new Intent(this, menu_utama_navigasi.class));
+    }
+
+    public void login(View view) {
+        Intent intent = new Intent(OTP.this, Login.class);
+        startActivity(intent);
     }
 }

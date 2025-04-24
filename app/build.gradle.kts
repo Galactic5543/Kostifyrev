@@ -46,6 +46,7 @@ dependencies {
 
     // Firebase Core
     implementation(libs.firebase.firestore)
+    implementation (libs.play.services.auth.v2100)
 
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
