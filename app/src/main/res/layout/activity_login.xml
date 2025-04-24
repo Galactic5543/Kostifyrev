@@ -142,7 +142,7 @@
         android:drawableStart="@drawable/logogoogle"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-
+        android:onClick="signInWithGoogle"
         />
 
     <LinearLayout

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,14 +19,23 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import androidx.appcompat.app.AlertDialog;
+
+import android.text.InputType;
+
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.firestore.FieldValue;
 public class Login extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
+    private EditText txtEmail, txtPassword;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +43,16 @@ public class Login extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        txtEmail = findViewById(R.id.txtemail);
+        txtPassword = findViewById(R.id.txtpassword);
+        sessionManager = new SessionManager(this);
 
-        // Configure Google Sign In
+        TextView txtLupaPassword = findViewById(R.id.textlupa);
+        txtLupaPassword.setOnClickListener(v -> showResetPasswordDialog());
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id)) // Pastikan client ID sudah ada di strings.xml
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
@@ -49,7 +64,6 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Method untuk login dengan Google
     public void signInWithGoogle(View view) {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -62,11 +76,9 @@ public class Login extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign In berhasil, autentikasi dengan Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
-                // Google Sign In gagal
                 Log.w("GoogleSignIn", "Google sign in failed", e);
                 Toast.makeText(this, "Authentication failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -78,13 +90,57 @@ public class Login extends AppCompatActivity {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user != null) {
+                            sessionManager.createLoginSession(user.getEmail());
+                        }
                         Intent intent = new Intent(Login.this, menu_utama_navigasi.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        // If sign in fails
                         Toast.makeText(Login.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void showResetPasswordDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Reset Password");
+        builder.setMessage("Masukkan email untuk menerima link reset password");
+
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        input.setHint("Email");
+        builder.setView(input);
+
+        builder.setPositiveButton("Kirim", (dialog, which) -> {
+            String email = input.getText().toString().trim();
+            if (!email.isEmpty()) {
+                sendPasswordResetEmail(email);
+            } else {
+                Toast.makeText(this, "Email tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Batal", null);
+        builder.show();
+    }
+
+    private void sendPasswordResetEmail(String email) {
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(
+                                Login.this,
+                                "Email reset password telah dikirim ke " + email,
+                                Toast.LENGTH_LONG
+                        ).show();
+                    } else {
+                        Toast.makeText(
+                                Login.this,
+                                "Gagal mengirim email: " + task.getException().getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
                     }
                 });
     }
@@ -92,36 +148,74 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (mAuth.getCurrentUser() != null) {
-            // Tambahkan pengecekan status verifikasi OTP
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            String email = mAuth.getCurrentUser().getEmail();
 
-            db.collection("otp_verification")
-                    .document(email)
-                    .get()
-                    .addOnSuccessListener(document -> {
-                        if (document.exists()) {
-                            String status = document.getString("status");
-                            if ("verified".equals(status)) {
-                                // Kalau sudah terverifikasi, masuk ke halaman utama
-                                startActivity(new Intent(Login.this, menu_utama_navigasi.class));
-                                finish();
-                            } else {
-                                // Kalau belum, arahkan ke OTP page
-                                Intent intent = new Intent(Login.this, OTP.class);
-                                intent.putExtra("EMAIL", email);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }
-                    });
+        // Cek apakah user sudah login melalui session
+        if (sessionManager.isLoggedIn()) {
+            String email = sessionManager.getUserEmail();  // Ambil email dari session
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+            // Jika FirebaseUser valid dan email terverifikasi
+            if (currentUser != null && currentUser.getEmail().equals(email) && currentUser.isEmailVerified()) {
+                startActivity(new Intent(Login.this, menu_utama_navigasi.class));
+                finish();
+            } else {
+                // Jika email tidak terverifikasi atau pengguna tidak login dengan benar
+                Toast.makeText(Login.this, "Email belum terverifikasi atau sesi kadaluarsa", Toast.LENGTH_LONG).show();
+                sessionManager.logoutUser();  // Logout jika ada masalah
+            }
         }
     }
 
 
-    public void notifikasi(View view) {
-        Intent intent = new Intent(Login.this, menu_utama_navigasi.class);
-        startActivity(intent);
+
+
+    public void loginWithEmail(View view) {
+        String email = txtEmail.getText().toString().trim();
+        String password = txtPassword.getText().toString().trim();
+
+        if(email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Email dan password wajib diisi", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if(task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if(user != null) {
+                            user.reload().addOnCompleteListener(reloadTask -> {
+                                if(user.isEmailVerified()) {
+                                    sessionManager.createLoginSession(user.getEmail());
+                                    updateVerificationStatus(user.getUid());
+                                    startActivity(new Intent(Login.this, menu_utama_navigasi.class));
+                                    finish();
+                                } else {
+                                    Toast.makeText(
+                                            Login.this,
+                                            "Email belum diverifikasi! Cek email Anda",
+                                            Toast.LENGTH_LONG
+                                    ).show();
+                                    mAuth.signOut();
+                                }
+                            });
+                        }
+                    } else {
+                        Toast.makeText(
+                                Login.this,
+                                "Login gagal: " + task.getException().getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                });
+    }
+
+    private void updateVerificationStatus(String userId) {
+        FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(userId)
+                .update("terverifikasi", true)
+                .addOnFailureListener(e -> {
+                    Log.e("FIRESTORE", "Gagal update status verifikasi: " + e.getMessage());
+                });
     }
 }

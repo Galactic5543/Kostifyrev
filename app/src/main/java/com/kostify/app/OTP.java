@@ -194,19 +194,10 @@ public class OTP extends AppCompatActivity {
     }
 
     private String getEnteredOTP() {
-        EditText otp1 = findViewById(R.id.txtotp1);
-        EditText otp2 = findViewById(R.id.txtotp2);
-        EditText otp3 = findViewById(R.id.txtotp3);
-        EditText otp4 = findViewById(R.id.txtotp4);
-        EditText otp5 = findViewById(R.id.txtotp5);
-        EditText otp6 = findViewById(R.id.txtotp6);
+        EditText otp1 = findViewById(R.id.txtotp);
 
-        return otp1.getText().toString() +
-                otp2.getText().toString() +
-                otp3.getText().toString() +
-                otp4.getText().toString() +
-                otp5.getText().toString() +
-                otp6.getText().toString();
+
+        return otp1.getText().toString();
     }
 
 
