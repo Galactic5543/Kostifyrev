@@ -110,7 +110,7 @@
         android:gravity="top|start" />
 
     <Button
-        android:id="@+id/btnajukankerusakan"
+        android:id="@+id/btntambahkost"
         android:layout_below="@+id/txtjumlahkamar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
