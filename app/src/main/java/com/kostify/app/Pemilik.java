@@ -1,5 +1,6 @@
 package com.kostify.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,14 +19,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
-
 public class Pemilik extends Fragment {
 
+    private static final String DEFAULT_KOST_OPTION = "Pilih Kost";  // Konstanta untuk "Pilih Kost"
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private TextView namakostTextView, alamatTextView, totalkamarkosongTextView;
     private Spinner gantikost;  // Declare Spinner globally
     private ArrayList<String> kostNames; // ArrayList to hold kost names
+    private String selectedKostId; // Variable to store the selected Kost ID
 
     public Pemilik() {
         // Required empty public constructor
@@ -58,8 +60,8 @@ public class Pemilik extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String selectedKost = (String) parentView.getItemAtPosition(position);
-                if (!selectedKost.equals("Pilih Kost")) {  // Avoid querying for "Pilih Kost"
-                    updateKostData(selectedKost);  // Update data berdasarkan kost yang dipilih
+                if (!selectedKost.equals(DEFAULT_KOST_OPTION)) {  // Avoid querying for "Pilih Kost"
+                    updateKostData(selectedKost);
                 }
             }
 
@@ -70,17 +72,28 @@ public class Pemilik extends Fragment {
             }
         });
 
+        // Menambahkan fungsi untuk menghapus kost
+        view.findViewById(R.id.btnhapuskost).setOnClickListener(v -> hapusKost());
+
         // Navigasi ke berbagai fragment
         view.findViewById(R.id.mntambahkost).setOnClickListener(v -> opentambahkost());
-        view.findViewById(R.id.mninfokost).setOnClickListener(v -> openinfokost());
-        view.findViewById(R.id.mnpenyewa).setOnClickListener(v -> openpenyewa());
+        view.findViewById(R.id.mninfokost).setOnClickListener(v -> openinfoKost());
+        view.findViewById(R.id.mnpenyewa).setOnClickListener(v -> openlistpenyewa());
         view.findViewById(R.id.mnpengumuman).setOnClickListener(v -> openpengumuman());
         view.findViewById(R.id.btndetailpenyewa).setOnClickListener(v -> openlistpenyewa());
 
         return view;
     }
 
+
+
+
     private void fetchKostNames() {
+        if (auth.getCurrentUser() == null) {
+            Log.d("Pemilik", "User belum login.");
+            return;
+        }
+
         String userId = auth.getCurrentUser().getUid();
 
         db.collection("kost")
@@ -89,8 +102,9 @@ public class Pemilik extends Fragment {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         kostNames.clear();
-                        kostNames.add("Pilih Kost");
+                        kostNames.add(DEFAULT_KOST_OPTION);  // "Pilih Kost"
 
+                        // Menambahkan nama kost ke list
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             String namaKost = documentSnapshot.getString("nama");
                             if (namaKost != null && !namaKost.isEmpty()) {
@@ -98,43 +112,68 @@ public class Pemilik extends Fragment {
                             }
                         }
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, kostNames);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        gantikost.setAdapter(adapter);
+                        // Menambahkan "Kosong" jika tidak ada data
+                        if (kostNames.size() == 1) {  // Jika hanya ada pilihan "Pilih Kost"
+                            kostNames.add("Kosong");
+                        }
 
-                        // Pilih kost terbaru (yang terakhir ditambahkan)
-                        if (kostNames.size() > 1) {
-                            gantikost.setSelection(kostNames.size() - 1);
+                        if (isAdded()) {
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, kostNames);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            gantikost.setAdapter(adapter);
+
+                            // Pilih kost terbaru (yang terakhir ditambahkan)
+                            if (kostNames.size() > 1) {
+                                gantikost.setSelection(kostNames.size() - 1);
+                            } else {
+                                // Jika hanya ada "Kosong", pilih itu
+                                gantikost.setSelection(0);
+                            }
                         }
 
                     } else {
                         Log.d("Pemilik", "Dokumen tidak ditemukan.");
-                        setEmptyState();
+                        if (isAdded()) {
+                            // Menambahkan "Kosong" jika tidak ada kost sama sekali
+                            kostNames.clear();
+                            kostNames.add("Kosong");
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, kostNames);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            gantikost.setAdapter(adapter);
+                        }
                     }
                 })
                 .addOnFailureListener(e -> {
                     Log.d("Pemilik", "Gagal mengambil data: " + e.getMessage());
-                    setEmptyState();
+                    if (isAdded()) {
+                        setEmptyState();
+                    }
                 });
     }
 
 
     private void updateKostData(String kostName) {
+        if (auth.getCurrentUser() == null) {
+            Log.d("Pemilik", "User belum login.");
+            return;
+        }
+
         String userId = auth.getCurrentUser().getUid(); // Mendapatkan userId dari Firebase Auth
 
         // Melakukan query untuk mencari kost berdasarkan nama dan userId
         db.collection("kost")
                 .whereEqualTo("userId", userId)
-                .whereEqualTo("nama", kostName) // Filter berdasarkan nama kost
+                .whereEqualTo("nama", kostName)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         // Cek jika query tidak kosong
                         QueryDocumentSnapshot documentSnapshot = (QueryDocumentSnapshot) queryDocumentSnapshots.getDocuments().get(0);
+                        selectedKostId = documentSnapshot.getId(); // Menyimpan ID Kost yang dipilih
                         String alamat = documentSnapshot.getString("alamat");
-                        Long totalKamarKosong = documentSnapshot.getLong("jumlah_kamar");
+                        Long totalKamar = documentSnapshot.getLong("jumlah_kamar");
 
-                        Log.d("Pemilik", "Nama Kost: " + kostName + ", Alamat: " + alamat + ", Kamar Kosong: " + totalKamarKosong);
+                        Log.d("Pemilik", "Nama Kost: " + kostName + ", Alamat: " + alamat + ", Jumlah Kamar: " + totalKamar);
 
                         // Set nama kost ke TextView
                         namakostTextView.setText(kostName);
@@ -142,8 +181,14 @@ public class Pemilik extends Fragment {
                         // Set alamat ke TextView
                         setTextOrDefault(alamat, alamatTextView, "Alamat tidak tersedia");
 
-                        // Set total kamar kosong ke TextView
-                        setKamarKosong(totalKamarKosong);
+
+                        // Set jumlah kamar ke TextView
+                        if (totalKamar != null) {
+                            totalkamarkosongTextView.setText( totalKamar + " / "+ totalKamar + " Kamar");
+                        } else {
+                            totalkamarkosongTextView.setText("Jumlah Kamar tidak tersedia");
+                        }
+
                     } else {
                         // Menangani kasus jika dokumen tidak ditemukan
                         Log.d("Pemilik", "Dokumen tidak ditemukan.");
@@ -154,22 +199,38 @@ public class Pemilik extends Fragment {
                     Log.d("Pemilik", "Gagal mengambil data: " + e.getMessage());
                     setEmptyState();
                 });
-
     }
+
+
+    private void hapusKost() {
+        if (auth.getCurrentUser() == null || selectedKostId == null) {
+            Log.d("Pemilik", "Tidak ada kost yang dipilih.");
+            return;
+        }
+
+        // Menghapus koleksi kost yang dipilih
+        db.collection("kost").document(selectedKostId)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("Pemilik", "Kost berhasil dihapus.");
+                    // Mengupdate Spinner dan TextView
+                    fetchKostNames();  // Update spinner setelah penghapusan
+
+                    // Mengatur spinner ke posisi default (Pilih Kost)
+                    gantikost.setSelection(0);
+
+                    // Reset data TextView
+                    setEmptyState();
+                })
+                .addOnFailureListener(e -> Log.d("Pemilik", "Gagal menghapus kost: " + e.getMessage()));
+    }
+
 
     private void setTextOrDefault(String value, TextView textView, String defaultText) {
         if (value != null && !value.isEmpty()) {
             textView.setText(value);
         } else {
             textView.setText(defaultText);
-        }
-    }
-
-    private void setKamarKosong(Long totalKamarKosong) {
-        if (totalKamarKosong != null) {
-            totalkamarkosongTextView.setText("0 / " + totalKamarKosong + " kamar");
-        } else {
-            totalkamarkosongTextView.setText("0 / 0 Kamar");
         }
     }
 
@@ -180,25 +241,23 @@ public class Pemilik extends Fragment {
     }
 
     private void opentambahkost() {
-        Fragment fragment = new tambah_kost();
+        Fragment fragment = new tambah_kost();  // Perbaikan penamaan
         navigateToFragment(fragment);
     }
 
-    private void openinfokost() {
-        // Navigasi ke informasi kost
-    }
-
-    private void openpenyewa() {
-        // Navigasi ke penyewa
+    private void openinfoKost() {
+        Intent intent = new Intent(requireActivity(), navigasi_info_kost.class);  // Perbaikan penamaan
+        startActivity(intent);
     }
 
     private void openpengumuman() {
-        Fragment fragment = new pengumuman();
+        Fragment fragment = new pengumuman();  // Perbaikan penamaan
         navigateToFragment(fragment);
     }
 
     private void openlistpenyewa() {
-        // Navigasi ke list penyewa
+        Intent intent = new Intent(requireActivity(), nav_list_penyewa.class);  // Perbaikan penamaan
+        startActivity(intent);
     }
 
     private void navigateToFragment(Fragment fragment) {
@@ -207,4 +266,6 @@ public class Pemilik extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-}
+    }
+
+

@@ -161,6 +161,18 @@ android:layout_marginTop="10dp"
             android:layout_marginStart="8dp"/>
 
 
+        <Button
+            android:id="@+id/btnhapuskost"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:text="Hapus"
+            android:background="@drawable/backgroundbutton"
+            android:backgroundTint="@color/warna6"
+            android:textSize="11sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="8dp"/>
+
 
     </RelativeLayout>
 
