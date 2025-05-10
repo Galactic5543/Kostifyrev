@@ -29,6 +29,16 @@ public class Profil extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        RelativeLayout mnAkun = view.findViewById(R.id.mnakun);
+        mnAkun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Pindah ke AccountActivity
+                Intent intent = new Intent(requireActivity(), AccountActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // Mengakses RelativeLayout dengan ID mnlogout
         RelativeLayout mnLogoutLayout = view.findViewById(R.id.mnlogout);
 
@@ -52,6 +62,8 @@ public class Profil extends Fragment {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             requireActivity().finish();
+
         });
+
     }
 }
