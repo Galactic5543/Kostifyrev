@@ -103,7 +103,6 @@ public class Pemilik extends Fragment {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         kostNames.clear();
                         kostNames.add(DEFAULT_KOST_OPTION);  // "Pilih Kost"
-
                         // Menambahkan nama kost ke list
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             String namaKost = documentSnapshot.getString("nama");
