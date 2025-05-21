@@ -24,7 +24,7 @@ public class Pemilik extends Fragment {
     private static final String DEFAULT_KOST_OPTION = "Pilih Kost";  // Konstanta untuk "Pilih Kost"
     private FirebaseFirestore db;
     private FirebaseAuth auth;
-    private TextView namakostTextView, alamatTextView, totalkamarkosongTextView;
+    private TextView namakostTextView, alamatTextView,   angkajumlahkamarTextView;
     private Spinner gantikost;  // Declare Spinner globally
     private ArrayList<String> kostNames; // ArrayList to hold kost names
     private String selectedKostId; // Variable to store the selected Kost ID
@@ -46,7 +46,7 @@ public class Pemilik extends Fragment {
         // Inisialisasi TextView
         namakostTextView = view.findViewById(R.id.namakost);
         alamatTextView = view.findViewById(R.id.alamat);
-        totalkamarkosongTextView = view.findViewById(R.id.totalkamarkosong);
+        angkajumlahkamarTextView = view.findViewById(R.id.angkajumlahkamar);
 
         // Inisialisasi Spinner
         gantikost = view.findViewById(R.id.gantikost);
@@ -72,15 +72,14 @@ public class Pemilik extends Fragment {
             }
         });
 
-        // Menambahkan fungsi untuk menghapus kost
-        view.findViewById(R.id.btnhapuskost).setOnClickListener(v -> hapusKost());
+view.findViewById(R.id.btnhapuskost).setOnClickListener(v -> hapusKost());
 
-        // Navigasi ke berbagai fragment
+
         view.findViewById(R.id.mntambahkost).setOnClickListener(v -> opentambahkost());
         view.findViewById(R.id.mninfokost).setOnClickListener(v -> openinfoKost());
-        view.findViewById(R.id.mnpenyewa).setOnClickListener(v -> openlistpenyewa());
         view.findViewById(R.id.mnpengumuman).setOnClickListener(v -> openpengumuman());
-        view.findViewById(R.id.btndetailpenyewa).setOnClickListener(v -> openlistpenyewa());
+        view.findViewById(R.id.mnpenyewa).setOnClickListener(v -> openlistpenyewa());
+        view.findViewById(R.id.mneditkost).setOnClickListener(v -> openeditkost());
 
         return view;
     }
@@ -183,9 +182,7 @@ public class Pemilik extends Fragment {
 
                         // Set jumlah kamar ke TextView
                         if (totalKamar != null) {
-                            totalkamarkosongTextView.setText( totalKamar + " / "+ totalKamar + " Kamar");
-                        } else {
-                            totalkamarkosongTextView.setText("Jumlah Kamar tidak tersedia");
+                            angkajumlahkamarTextView.setText(String.valueOf(totalKamar));
                         }
 
                     } else {
@@ -236,17 +233,23 @@ public class Pemilik extends Fragment {
     private void setEmptyState() {
         namakostTextView.setText("Kosong");
         alamatTextView.setText("Alamat tidak tersedia");
-        totalkamarkosongTextView.setText("0 / 0 Kamar");
+        angkajumlahkamarTextView.setText("0");
     }
 
     private void opentambahkost() {
-        Fragment fragment = new tambah_kost();  // Perbaikan penamaan
+        Fragment fragment = new tambah_kost();
         navigateToFragment(fragment);
     }
 
+    private void openeditkost() {
+        Fragment fragment = new edit_kost();
+        navigateToFragment(fragment);
+    }
+
+
     private void openinfoKost() {
-        Intent intent = new Intent(requireActivity(), navigasi_info_kost.class);  // Perbaikan penamaan
-        startActivity(intent);
+        Fragment fragment = new informasi_kost();
+        navigateToFragment(fragment);
     }
 
     private void openpengumuman() {

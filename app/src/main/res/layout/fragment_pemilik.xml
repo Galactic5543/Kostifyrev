@@ -12,113 +12,116 @@
 
 
     <ImageView
+        android:id="@+id/bg"
         android:layout_width="match_parent"
-        android:layout_height="195dp"
+        android:layout_height="320dp"
         android:src="@drawable/bg_bottomcorner5"/>
-
-
-    <TextView
-        android:id="@+id/texthalo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Halo,"
-        android:textSize="29sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="15dp"
-        android:textColor="@color/warna10" />
 
 
     <TextView
         android:id="@+id/textuser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fajar!"
-        android:layout_toEndOf="@id/texthalo"
-        android:layout_alignTop="@id/texthalo"
+        android:text="Dashboard Pemilik"
         android:textSize="29sp"
         android:textStyle="bold"
-        android:layout_marginStart="5dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="10dp"
         android:textColor="@color/warna10" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profileImage"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_margin="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="15dp"
         android:layout_alignParentEnd="true"
         android:src="@drawable/profil"
         android:adjustViewBounds="true"
         android:scaleType="centerInside"/>
 
-    <!-- Search EditText -->
-    <EditText
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/texthalo"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/backgroundedittextstroke1radius15"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="20dp"
-        android:hint="Search"
-        android:padding="2dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/abu"
-        android:textSize="15sp" />
 
 
 
     <RelativeLayout
-        android:id="@+id/kontainerinfosewa"
+        android:id="@+id/kontainerinfokost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bgradius15"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="15dp"
-        android:layout_below="@id/search"
+        android:layout_below="@id/textuser"
         android:elevation="7dp"
         android:padding="10dp">
 
-        <TextView
-            android:id="@+id/namakost"
+        <LinearLayout
+            android:id="@+id/kontainernamakost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kost Melati"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="@color/warna10"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/alamat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/namakost"
-            android:text="Jl. Mahesa, Dusun II Karangrau, Karangrau, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah"
-            android:textColor="@color/warna10"
-            android:textSize="11sp"
-            android:textStyle="normal"
+            <TextView
+                android:id="@+id/namakost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kost Melati"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/warna10"
+                android:layout_marginEnd="8dp"/>
+
+            <ImageView
+
+                android:id="@+id/btnhapuskost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_hapus"/>
+        </LinearLayout>
+
+
+
             />
 
-        <TextView
-            android:id="@+id/textkamarkosong"
+
+        <LinearLayout
+            android:id="@+id/kontaineralamatkost"
+            android:layout_below="@id/kontainernamakost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/alamat"
-android:layout_marginTop="10dp"
-            android:text="Kamar Kosong"
-            android:textStyle="bold"
-            android:textSize="11sp"
-            android:textColor="@color/warna10"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginVertical="5dp"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/ic_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_location"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:id="@+id/alamat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/kontainernamakost"
+                android:text="Jl. Mahesa, Dusun II Karangrau, Karangrau, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah"
+                android:textColor="@color/warna10"
+                android:layout_toEndOf="@id/ic_location"
+                android:textSize="11sp"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/totalkamarkosong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/alamat"
+            android:layout_below="@+id/kontaineralamatkost"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
             android:text="20 / 30 Kamar"
@@ -126,63 +129,173 @@ android:layout_marginTop="10dp"
             android:textColor="@color/warna10"
             android:textSize="11sp"/>
 
-        <ProgressBar
-            android:id="@+id/progreskamar"
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_below="@+id/textkamarkosong"
-            android:layout_marginTop="5dp"
-            android:max="30"
-            />
+
+<ImageView
+    android:id="@id/ic_gantikost"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_gantikost"
+    android:layout_below="@id/kontaineralamatkost"
+    android:paddingVertical="8dp"
+    />
 
         <Spinner
             android:id="@+id/gantikost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/progreskamar"
-
+            android:layout_below="@id/kontaineralamatkost"
             android:padding="8dp"
+            android:layout_toEndOf="@+id/ic_gantikost"
             android:dropDownWidth="match_parent"
             android:layout_marginEnd="8dp"/>
 
         <Button
-            android:id="@+id/btndetailpenyewa"
+            android:id="@+id/mntambahkost"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:drawableLeft="@drawable/ic_tambah"
+            android:paddingHorizontal="10dp"
             android:layout_alignTop="@id/gantikost"
             android:layout_alignBottom="@id/gantikost"
             android:layout_toEndOf="@id/gantikost"
-            android:text="Detail Penyewa"
+            android:text="Tambah Kost "
             android:background="@drawable/backgroundbutton"
             android:backgroundTint="@color/warna7"
             android:textSize="11sp"
             android:textColor="@color/white"
             android:layout_marginStart="8dp"/>
-
-
-        <Button
-            android:id="@+id/btnhapuskost"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_alignParentEnd="true"
-            android:text="Hapus"
-            android:background="@drawable/backgroundbutton"
-            android:backgroundTint="@color/warna6"
-            android:textSize="11sp"
-            android:textColor="@color/white"
-            android:layout_marginStart="8dp"/>
-
-
     </RelativeLayout>
 
 
+
+
+    <LinearLayout
+        android:id="@+id/layout_kamarinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/kontainerinfokost"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:id="@+id/kontainerkamarkosong"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            android:background="@drawable/bgradius15"
+            android:backgroundTint="@color/warna7"
+            android:elevation="7dp"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/kamarkosong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kamar Kosong"
+                android:layout_centerHorizontal="true"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/angkakamarkosong"
+                android:layout_below="@id/kamarkosong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:text="0"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/kontainerkamarisi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            android:background="@drawable/bgradius15"
+            android:backgroundTint="@color/warna7"
+            android:elevation="7dp"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/kamarisi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kamar Isi"
+                android:layout_centerHorizontal="true"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/angkakamarisi"
+                android:layout_below="@id/kamarisi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:text="0"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/kontainerjumlahkamar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            android:background="@drawable/bgradius15"
+            android:backgroundTint="@color/warna7"
+            android:elevation="7dp"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/jumlahkamar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Jumlah Kamar"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/angkajumlahkamar"
+                android:layout_below="@id/jumlahkamar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:text="0"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
     <TextView
-        android:id="@+id/textdashboardpenyewa"
+        android:id="@+id/textnotifikasiterbaru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dashboard Penyewa"
-        android:layout_below="@id/kontainerinfosewa"
+        android:text="Notifikasi Terbaru"
+        android:layout_below="@id/bg"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
@@ -191,231 +304,279 @@ android:layout_marginTop="10dp"
         android:textColor="@color/warna10"/>
 
 
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/notifikasi"
+        android:layout_below="@+id/textnotifikasiterbaru"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="10dp"
-        android:layout_below="@+id/textdashboardpenyewa">
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/bgradius15"
+        android:backgroundTint="@color/white"
+        android:elevation="7dp"
+        android:padding="10dp">
 
-        <!-- ===================== INFO KOST ===================== -->
-        <RelativeLayout
-            android:id="@+id/mntambahkost"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/ic_notif"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground">
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_notif"/>
 
-            <ImageView
-                android:id="@+id/ictambahkost"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_tambah_kost"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
-
-            <TextView
-                android:id="@+id/textedittambahkost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/ictambahkost"
-                android:layout_marginStart="8dp"
-                android:text="Tambah Kost"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/warna10" />
-
-            <TextView
-                android:id="@+id/textdescedittambahkost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textedittambahkost"
-                android:layout_alignStart="@id/textedittambahkost"
-                android:text="Tambah,Edit cabang kost"
-                android:textSize="11sp"
-                android:textColor="@color/warna10" />
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/arrow"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
-        </RelativeLayout>
-
-        <!-- Garis pemisah -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/garis" />
-
-        <!-- ===================== PENGAJUAN ===================== -->
-        <RelativeLayout
-            android:id="@+id/mninfokost"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/judul_notif"
+            android:layout_toEndOf="@+id/ic_notif"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:elevation="2dp">
+            android:text="Validasi Bukti Pembayaran"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/warna10"
+            android:layout_marginLeft="10dp"/>
 
-            <ImageView
-                android:id="@+id/ic_infokost"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:id="@+id/waktu_notif"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/warna10"
+            android:layout_alignParentEnd="true"
+            android:text="5/08/2025"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/judul_notif"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="3dp"
+            android:textSize="12sp"
+            android:textColor="@color/warna10"
+            android:layout_toEndOf="@+id/ic_notif"
+            android:text="Fajar Nugroho meminta validasi bukti pembayaran untuk perpanjangan sewa"/>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/textkelolakost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kelola Kost"
+        android:layout_below="@id/notifikasi"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/warna10"/>
+
+
+    <LinearLayout
+        android:id="@+id/menubaris1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:layout_below="@+id/textkelolakost"
+        android:paddingHorizontal="10dp">
+
+        <!-- BTN 1 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="4dp">
+
+            <ImageButton
+                android:id="@+id/mninfokost"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bgmenu"
                 android:src="@drawable/ic_info"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
+                android:scaleType="centerInside"
+                android:contentDescription="Btn1" />
 
             <TextView
-                android:id="@+id/textinfokost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/ic_infokost"
-                android:layout_marginStart="8dp"
                 android:text="Info Kost"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="@color/warna10" />
+                android:textColor="@color/black"
+                android:gravity="center"/>
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/texteditdescinfokost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textinfokost"
-                android:layout_alignStart="@id/textinfokost"
-                android:text="Edit info kost dan peraturan"
-                android:textSize="11sp"
-                android:textColor="@color/warna10" />
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/arrow"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
-        </RelativeLayout>
-
-        <!-- Garis pemisah -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/garis" />
-
-        <!-- ===================== Penyewa ===================== -->
-        <RelativeLayout
-            android:id="@+id/mnpenyewa"
-            android:layout_width="match_parent"
+        <!-- BTN 2 -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:elevation="2dp">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="4dp">
 
-            <ImageView
-                android:id="@+id/ic_penyewa"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_penyewa"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
+            <ImageButton
+                android:id="@+id/mnpenyewa"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bgmenu"
+                android:src="@drawable/iconpenyewa"
+                android:scaleType="centerInside"
+                android:contentDescription="Btn2" />
 
             <TextView
-                android:id="@+id/textpenyewa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/ic_penyewa"
-                android:layout_marginStart="8dp"
                 android:text="Penyewa"
-                android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/warna10" />
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:gravity="center"/>
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/textdescpenyewa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textpenyewa"
-                android:layout_alignStart="@id/textpenyewa"
-                android:text="List Penyewa,pending"
-                android:textSize="11sp"
-                android:textColor="@color/warna10" />
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/arrow"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
-        </RelativeLayout>
-
-        <!-- Garis pemisah -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/garis" />
-
-        <!-- ===================== INFO SEWA ===================== -->
-        <RelativeLayout
-            android:id="@+id/mnpengumuman"
-            android:layout_width="match_parent"
+        <!-- BTN 3 -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:elevation="2dp">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="4dp">
 
-            <ImageView
-                android:id="@+id/ic_pengumuman"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_pengumuman"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
+            <ImageButton
+                android:id="@+id/mneditkost"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bgmenu"
+                android:src="@drawable/ic_edit"
+                android:scaleType="centerInside"
+                android:contentDescription="Btn3" />
 
             <TextView
-                android:id="@+id/textpengumuman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/ic_pengumuman"
-                android:layout_marginStart="8dp"
-                android:text="Pengumuman"
-                android:textSize="16sp"
+                android:text="Edit Kost"
                 android:textStyle="bold"
-                android:textColor="@color/warna10" />
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <!-- BTN 4 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="4dp">
+
+            <ImageButton
+                android:id="@+id/mpembayaran"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bgmenu"
+                android:src="@drawable/ic_pembayaran"
+                android:scaleType="centerInside"
+                android:contentDescription="Btn4" />
 
             <TextView
-                android:id="@+id/textdescpengumuman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textpengumuman"
-                android:layout_alignStart="@id/textpengumuman"
-                android:text="Pengumuman Penyewa"
-                android:textSize="11sp"
-                android:textColor="@color/warna10" />
+                android:text="Pembayaran"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:gravity="center"/>
+        </LinearLayout>
 
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/arrow"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
-        </RelativeLayout>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/menubaris2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:weightSum="4"
+        android:layout_below="@+id/menubaris1"
+        android:paddingHorizontal="15dp">
+
+
+        <!-- BTN 5 -->
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="8dp">
+
+            <ImageButton
+                android:id="@+id/menunotifikasi"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bgmenu"
+                android:src="@drawable/ic_notifikasi"
+                android:scaleType="centerInside"
+                android:contentDescription="Btn5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notifikasi"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:gravity="center"/>
+        </LinearLayout>
+
+
+        <!-- BTN 6 -->
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="8dp">
+
+            <ImageButton
+                android:id="@+id/mnpengumuman"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bgmenu"
+                android:src="@drawable/ic_pengumuman"
+                android:scaleType="centerInside"
+                android:contentDescription="Btn6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pengumuman"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:gravity="center"/>
+        </LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
 
 </RelativeLayout>

@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.kostify.app.databinding.ActivityNavListPenyewaBinding;
-import com.kostify.app.databinding.ActivityNavigasiInfoKostBinding;
 import com.kostify.app.databinding.ActivityNavigasiUtamaBinding;
 
 public class nav_list_penyewa extends AppCompatActivity {

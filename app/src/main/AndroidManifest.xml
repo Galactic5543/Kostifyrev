@@ -18,16 +18,12 @@
         <activity
             android:name=".nav_list_penyewa"
             android:exported="false" />
-        <activity
-            android:name=".navigasi_info_kost"
-            android:exported="false" />
+
         <activity
             android:name=".navigasi_pengajuan"
             android:exported="false"
             android:theme="@style/Theme.Kostifyrev" />
-        <activity
-            android:name=".Informasi_kost"
-            android:exported="false" />
+
         <activity
             android:name=".menu_utama_navigasi"
             android:exported="false" />

@@ -6,8 +6,39 @@
     tools:context=".edit_kost"
     android:background="#f4f4f4">
 
+    <RelativeLayout
+        android:id="@+id/kontainermenutop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:adjustViewBounds="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/texteditkost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Kost"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/warna10"/>
+    </RelativeLayout>
+
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        android:layout_below="@+id/kontainermenutop"
         android:layout_height="match_parent">
 
         <RelativeLayout
@@ -15,19 +46,12 @@
             android:layout_height="wrap_content"
             android:paddingBottom="32dp">
 
-            <ImageView
-                android:id="@+id/fotokost"
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:src="@drawable/bgradius15"
-                android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="15dp" />
+
 
             <TextView
-                android:id="@+id/namakost"
+                android:id="@+id/textinformasikost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fotokost"
                 android:layout_margin="15dp"
                 android:text="Informasi Kost"
                 android:textSize="25sp"
@@ -38,25 +62,19 @@
                 android:id="@+id/garis"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/namakost"
+                android:layout_below="@id/textinformasikost"
                 android:layout_marginHorizontal="15dp"
                 android:background="@drawable/garis" />
 
-            <TextView
-                android:id="@+id/alamat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/garis"
-                android:layout_marginHorizontal="15dp"
-                android:text="Jl. Mahesa, Dusun II Karangrau, Karangrau, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah"
-                android:textColor="@color/warna10"
-                android:textSize="14sp" />
+
+
+
 
             <TextView
                 android:id="@+id/textkontak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/alamat"
+                android:layout_below="@id/garis"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="15dp"
                 android:text="Kontak"
@@ -84,11 +102,36 @@
                 android:textColor="@color/warna10"
                 android:textSize="14sp" />
 
+
+            <TextView
+                android:id="@+id/textalamat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textgrupwhatsapp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="15dp"
+                android:text="Alamat Kost"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/warna10" />
+
+            <EditText
+                android:id="@+id/alamat"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/textalamat"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="15dp"
+                android:padding="10dp"
+                android:background="@drawable/backgroundedittextstroke1radius15"
+                android:maxLines="5"
+                android:gravity="top|start" />
+
             <TextView
                 android:id="@+id/textlinkgrupwhatsapp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textgrupwhatsapp"
+                android:layout_below="@id/alamat"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="15dp"
                 android:text="Link Grup Whatsapp"
@@ -108,20 +151,38 @@
                 android:maxLines="5"
                 android:gravity="top|start" />
 
-            <View
-                android:id="@+id/garis2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
+
+            <TextView
+                android:id="@+id/textjumlahkamar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/txtlinkgrupwhatsapp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="15dp"
-                android:background="@drawable/garis" />
+                android:text="Link Grup Whatsapp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/warna10" />
+
+            <EditText
+                android:id="@+id/txtjumlahkamar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/textjumlahkamar"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="15dp"
+                android:padding="10dp"
+                android:background="@drawable/backgroundedittextstroke1radius15"
+                android:maxLines="5"
+                android:gravity="top|start" />
+
+
 
             <TextView
                 android:id="@+id/textperaturan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/garis2"
+                android:layout_below="@id/txtjumlahkamar"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="15dp"
                 android:text="Peraturan"
@@ -135,17 +196,22 @@
                 android:layout_height="150dp"
                 android:layout_below="@id/textperaturan"
                 android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginBottom="20dp"
                 android:padding="10dp"
-                android:lineSpacingMultiplier="1.5"
                 android:background="@drawable/backgroundedittextstroke1radius15"
-                android:inputType="textMultiLine"
-                android:scrollbars="vertical"
-                android:maxLines="5"
+                android:inputType="textMultiLine|textCapSentences"
                 android:gravity="top|start"
+                android:lineSpacingMultiplier="1.5"
+                android:maxLines="5"
+                android:scrollbars="vertical"
+                android:overScrollMode="ifContentScrolls"
                 android:focusable="true"
-                android:focusableInTouchMode="true" />
+                android:focusableInTouchMode="true"
+                android:singleLine="false"
+                />
+
 
             <Button
                 android:id="@+id/btnsimpan"
@@ -159,6 +225,7 @@
                 android:backgroundTint="@color/warna7"
                 android:textSize="14sp"
                 android:textColor="@color/white" />
+
         </RelativeLayout>
     </ScrollView>
 

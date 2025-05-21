@@ -1,5 +1,6 @@
 package com.kostify.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -58,7 +59,28 @@ public class edit_kost extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_kost, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_kost, container, false);
+
+        // Tombol back
+        view.findViewById(R.id.ic_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backtopemilik();
+            }
+        });
+
+        return view;
     }
+
+    private void backtopemilik() {
+        Pemilik pemilikFragment = new Pemilik();
+
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frameLayout, pemilikFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
+
 }

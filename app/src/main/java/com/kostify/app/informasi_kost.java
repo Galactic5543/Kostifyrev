@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
-import android.widget.ImageView;
 
 public class informasi_kost extends Fragment {
 
@@ -17,7 +16,7 @@ public class informasi_kost extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_informasi_kost, container, false);
+        View view = inflater.inflate(R.layout.fragment_informasi_kost_pemilik, container, false);
 
         // Set listener untuk tombol back
         view.findViewById(R.id.ic_back).setOnClickListener(new View.OnClickListener() {
@@ -31,7 +30,7 @@ public class informasi_kost extends Fragment {
         return view;
     }
 
-    // Metode untuk kembali ke Fragment Penyewa
+
     private void backToPenyewaFragment() {
         // Membuat instance fragment Penyewa
         Penyewa penyewaFragment = new Penyewa();

@@ -3,23 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".info_kost">
+    tools:context=".informasi_kost">
 
-
-    <ImageView
-        android:id="@+id/fotokost"
+    <RelativeLayout
+        android:id="@+id/kontainermenutop"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:src="@drawable/bgradius15"
-        android:layout_marginTop="15dp"
-        android:layout_marginHorizontal="15dp"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:adjustViewBounds="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/textinformasikost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Informasi Kost"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/warna10"/>
+    </RelativeLayout>
+
+
 
 
     <TextView
         android:id="@+id/namakost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fotokost"
+        android:layout_below="@+id/kontainermenutop"
         android:layout_margin="15dp"
         android:text="Informasi Kost"
         android:textSize="25sp"
@@ -74,7 +96,7 @@
 
 
     <TextView
-        android:id="@+id/textgrupwhatsapp"
+        android:id="@+id/textwhatsapp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
@@ -91,7 +113,7 @@
         android:id="@+id/textlinkgrupwhatsapp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textgrupwhatsapp"
+        android:layout_below="@id/textwhatsapp"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="15dp"
         android:text="Link Grup Whatsapp"
@@ -105,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_below="@id/textlinkgrupwhatsapp"
-        android:text="Pemilik : Fajar Nugroho"
+        android:text="https://chat.whatsapp.com/Cnjxns5XKIL1s6gLnLrclg"
         android:textColor="@color/warna10"
         android:textSize="14sp"
         android:textStyle="normal"
@@ -134,22 +156,28 @@
         android:textColor="@color/warna10"/>
 
 
-    <EditText
-        android:id="@+id/peraturan"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+
+
+    <TextView
+
         android:layout_below="@+id/textperaturan"
-        android:padding="10dp"
-        android:lineSpacingMultiplier="1.5"
-        android:background="@drawable/backgroundedittextstroke1radius15"
-        android:layout_marginTop="15dp"
+        android:id="@+id/textisiperaturan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
-        android:layout_marginBottom="50dp"
-        android:inputType="textMultiLine"
-        android:scrollbars="vertical"
-        android:maxLines="5"
-        android:gravity="top|start"
-        android:focusable="true"
-        android:focusableInTouchMode="true" />
+        android:text="1.) Jam kunjungan tamu hanya diperbolehkan pukul 08.00–22.00 WIB. \n 2.)Tamu dilarang menginap tanpa izin pemilik kost.
+        \n 3.)Penghuni wajib menjaga kebersihan kamar dan area bersama.
+        \n 4.)Dilarang membawa hewan peliharaan ke dalam area kost.
+        \n 5.)Dilarang membuat keributan atau memutar musik keras setelah pukul 21.00 WIB.
+        \n 6.)Dilarang membawa atau mengonsumsi minuman keras dan obat terlarang.
+
+"
+        android:textColor="@color/warna10"
+        android:textSize="14sp"
+        android:textStyle="normal"
+       />
+
+
+
 
 </RelativeLayout>
