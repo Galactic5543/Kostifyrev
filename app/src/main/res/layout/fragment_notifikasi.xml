@@ -8,21 +8,21 @@
 
     <!-- Ikon kiri (pinggir kiri) -->
     <ImageView
-        android:id="@+id/icsort"
+        android:id="@+id/ic_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_sort"
+        android:src="@drawable/ic_back"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
    />
 
     <!-- Ikon kanan (pinggir kanan) -->
     <ImageView
-        android:id="@+id/icdot"
+        android:id="@+id/icsort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_dot"
+        android:src="@drawable/ic_sort"
         android:layout_marginTop="15dp"
         android:contentDescription="Dot Icon"
         android:layout_alignParentEnd="true"
@@ -46,8 +46,8 @@
         android:layout_width="287dp"
         android:layout_height="40dp"
         android:layout_below="@+id/textnotifikasi"
-        android:layout_alignStart="@+id/icsort"
-        android:layout_alignEnd="@id/icdot"
+        android:layout_alignStart="@+id/ic_back"
+        android:layout_alignEnd="@id/icsort"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="16dp"

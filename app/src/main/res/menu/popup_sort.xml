@@ -5,7 +5,7 @@
     android:title="Waktu"/>
 
     <item
-        android:id="@+id/kategori"
-        android:title="Kategori"/>
+        android:id="@+id/Huruf"
+        android:title="Huruf"/>
 
 </menu>

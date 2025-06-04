@@ -80,6 +80,7 @@ view.findViewById(R.id.btnhapuskost).setOnClickListener(v -> hapusKost());
         view.findViewById(R.id.mnpengumuman).setOnClickListener(v -> openpengumuman());
         view.findViewById(R.id.mnpenyewa).setOnClickListener(v -> openlistpenyewa());
         view.findViewById(R.id.mneditkost).setOnClickListener(v -> openeditkost());
+        view.findViewById(R.id.mnnotifikasi).setOnClickListener(v -> opennotifikasi());
 
         return view;
     }
@@ -262,12 +263,19 @@ view.findViewById(R.id.btnhapuskost).setOnClickListener(v -> hapusKost());
         startActivity(intent);
     }
 
+    private void opennotifikasi() {
+        Fragment fragment = new Notifikasi();
+        navigateToFragment(fragment);
+    }
+
+
     private void navigateToFragment(Fragment fragment) {
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frameLayout, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
     }
 
 

@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-
 public class Notifikasi extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -56,8 +55,8 @@ public class Notifikasi extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Tombol sort
         ImageView icSort = view.findViewById(R.id.icsort);
-
         icSort.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(requireContext(), v);
             MenuInflater inflater = popupMenu.getMenuInflater();
@@ -69,43 +68,21 @@ public class Notifikasi extends Fragment {
                 if (id == R.id.waktu) {
                     Toast.makeText(requireContext(), "Dipilih: Waktu", Toast.LENGTH_SHORT).show();
                     return true;
-                } else if (id == R.id.kategori) {
+                } else if (id == R.id.Huruf) {
                     Toast.makeText(requireContext(), "Dipilih: Kategori", Toast.LENGTH_SHORT).show();
                     return true;
                 } else {
                     return false;
                 }
-
             });
 
             popupMenu.show();
         });
 
-        ImageView icdot = view.findViewById(R.id.icdot);
-
-        icdot.setOnClickListener(v -> {
-            PopupMenu popupMenu = new PopupMenu(requireContext(), v);
-            MenuInflater inflater = popupMenu.getMenuInflater();
-            inflater.inflate(R.menu.popup_notif_setting, popupMenu.getMenu());
-
-            popupMenu.setOnMenuItemClickListener(item -> {
-                int id = item.getItemId();
-
-                if (id == R.id.refresh) {
-                    Toast.makeText(requireContext(), "Dipilih: Refresh", Toast.LENGTH_SHORT).show();
-                    return true;
-                } else if (id == R.id.pengaturan) {
-                    Toast.makeText(requireContext(), "Dipilih: Pengaturan", Toast.LENGTH_SHORT).show();
-                    return true;
-                } else {
-                    return false;
-                }
-
-            });
-
-            popupMenu.show();
+        // Tombol back
+        ImageView icBack = view.findViewById(R.id.ic_back);
+        icBack.setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager().popBackStack();
         });
-
-
     }
 }

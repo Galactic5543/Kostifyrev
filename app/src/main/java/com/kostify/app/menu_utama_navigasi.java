@@ -27,7 +27,7 @@ public class menu_utama_navigasi extends AppCompatActivity {
             replaceFragment(new Penyewa(), false);
             binding.bottomNav.setSelectedItemId(R.id.penyewa); // opsional untuk highlight menu
         } else {
-            replaceFragment(new Notifikasi(), false); // default fragment
+            replaceFragment(new Penyewa(), false); // default fragment
         }
 
         // Pantau perubahan di backstack
@@ -45,9 +45,6 @@ public class menu_utama_navigasi extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.pemilik) {
                 replaceFragment(new Pemilik(), false);
-                return true;
-            } else if (itemId == R.id.notifikasi) {
-                replaceFragment(new Notifikasi(), false);
                 return true;
             } else if (itemId == R.id.profil) {
                 replaceFragment(new Profil(), false);
@@ -78,7 +75,6 @@ public class menu_utama_navigasi extends AppCompatActivity {
     // Fungsi pengecekan fragment mana yang perlu menyembunyikan bottom nav
     private void updateBottomNavVisibility(Fragment fragment) {
         if (fragment instanceof informasi_kost ||
-                fragment instanceof Notifikasi ||
                 fragment instanceof Penyewa ||
                 fragment instanceof Pemilik ||
                 fragment instanceof Profil) {

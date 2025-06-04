@@ -9,13 +9,13 @@
     tools:context=".Pemilik"
     android:background="#F4F4F4">
 
+<RelativeLayout
+    android:id="@+id/bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottomcorner5"
+    android:paddingBottom="15dp">
 
-
-    <ImageView
-        android:id="@+id/bg"
-        android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:src="@drawable/bg_bottomcorner5"/>
 
 
     <TextView
@@ -82,7 +82,7 @@
 
 
 
-            />
+        />
 
 
         <LinearLayout
@@ -130,14 +130,14 @@
             android:textSize="11sp"/>
 
 
-<ImageView
-    android:id="@id/ic_gantikost"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/ic_gantikost"
-    android:layout_below="@id/kontaineralamatkost"
-    android:paddingVertical="8dp"
-    />
+        <ImageView
+            android:id="@id/ic_gantikost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_gantikost"
+            android:layout_below="@id/kontaineralamatkost"
+            android:paddingVertical="8dp"
+            />
 
         <Spinner
             android:id="@+id/gantikost"
@@ -174,9 +174,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/kontainerinfokost"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:background="@drawable/bgradius15"
+        android:backgroundTint="@color/warna6"
+        android:layout_marginHorizontal="10dp"
+        >
 
         <RelativeLayout
             android:id="@+id/kontainerkamarkosong"
@@ -184,8 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginHorizontal="4dp"
-            android:background="@drawable/bgradius15"
-            android:backgroundTint="@color/warna7"
+
             android:elevation="7dp"
             android:padding="10dp">
 
@@ -218,8 +220,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginHorizontal="4dp"
-            android:background="@drawable/bgradius15"
-            android:backgroundTint="@color/warna7"
             android:elevation="7dp"
             android:padding="10dp">
 
@@ -252,8 +252,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginHorizontal="4dp"
-            android:background="@drawable/bgradius15"
-            android:backgroundTint="@color/warna7"
             android:elevation="7dp"
             android:padding="10dp">
 
@@ -281,6 +279,9 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+
+</RelativeLayout>
 
 
 
@@ -498,73 +499,79 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/menubaris2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:weightSum="4"
-        android:layout_below="@+id/menubaris1"
-        android:paddingHorizontal="15dp">
 
 
-        <!-- BTN 5 -->
         <LinearLayout
-
-            android:layout_width="wrap_content"
+            android:id="@+id/menubaris2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_margin="8dp">
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:weightSum="4"
+            android:layout_below="@+id/menubaris1"
+            android:paddingHorizontal="10dp">
 
-            <ImageButton
-                android:id="@+id/menunotifikasi"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/bgmenu"
-                android:src="@drawable/ic_notifikasi"
-                android:scaleType="centerInside"
-                android:contentDescription="Btn5" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- BTN 1 -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Notifikasi"
-                android:textStyle="bold"
-                android:textSize="12sp"
-                android:textColor="@color/black"
-                android:gravity="center"/>
+                android:layout_weight="1"
+
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginHorizontal="4dp">
+
+                <ImageButton
+                    android:id="@+id/mnnotifikasi"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bgmenu"
+                    android:src="@drawable/ic_notifikasi"
+                    android:scaleType="centerInside"
+                    android:contentDescription="Btn1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notifikasi"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <!-- BTN 2 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginHorizontal="4dp">
+
+                <ImageButton
+                    android:id="@+id/mnpengumuman"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bgmenu"
+                    android:src="@drawable/ic_pengumuman"
+                    android:scaleType="centerInside"
+                    android:contentDescription="Btn2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pengumuman"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+
         </LinearLayout>
 
 
-        <!-- BTN 6 -->
-        <LinearLayout
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_margin="8dp">
-
-            <ImageButton
-                android:id="@+id/mnpengumuman"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/bgmenu"
-                android:src="@drawable/ic_pengumuman"
-                android:scaleType="centerInside"
-                android:contentDescription="Btn6" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pengumuman"
-                android:textStyle="bold"
-                android:textSize="12sp"
-                android:textColor="@color/black"
-                android:gravity="center"/>
-        </LinearLayout>
 
 
 
@@ -572,7 +579,6 @@
 
 
 
-    </LinearLayout>
 
 
 

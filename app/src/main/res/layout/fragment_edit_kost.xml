@@ -159,7 +159,7 @@
                 android:layout_below="@id/txtlinkgrupwhatsapp"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="15dp"
-                android:text="Link Grup Whatsapp"
+                android:text="Jumlah Kamar"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="@color/warna10" />
