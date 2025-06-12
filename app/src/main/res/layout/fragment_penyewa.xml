@@ -170,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/kontainernamakost"
-                android:text="Kamar A1"
+                android:text="05-28-2025"
                 android:textColor="@color/warna10"
                 android:layout_toEndOf="@id/ic_location"
                 android:textSize="11sp"
@@ -259,7 +259,7 @@
         android:id="@+id/textkelolakost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kelola Kost"
+        android:text="Dashboard Kost"
         android:layout_below="@id/notifikasi"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="15dp"
@@ -487,6 +487,9 @@
             android:gravity="center"/>
     </LinearLayout>
     </LinearLayout>
+
+
+
 
 
 </RelativeLayout>

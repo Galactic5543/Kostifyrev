@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_pending"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pending">
+    tools:context=".pending"
+    android:padding="16dp"
+    android:background="@color/white">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- RecyclerView untuk menampilkan daftar penyewa dengan status pending -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerPending"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Pending" />
+        android:scrollbars="vertical" />
 
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/textKosong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tidak ada penyewa pending"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+</RelativeLayout>

@@ -149,7 +149,7 @@
                     android:textColor="@color/warna10" />
 
                 <EditText
-                    android:id="@+id/peraturan"
+                    android:id="@+id/txtperaturan"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginTop="15dp"

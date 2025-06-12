@@ -57,7 +57,6 @@
         android:layout_width="match_parent"
         android:layout_marginHorizontal="30dp"
         android:layout_height="48dp"
-        android:inputType="number"
         android:layout_below="@+id/textcaption"
         android:layout_centerHorizontal="true"
         android:background="@drawable/backgroundedittextstroke1radius15"

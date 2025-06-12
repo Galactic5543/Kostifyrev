@@ -45,7 +45,7 @@ public class Penyewa extends Fragment {
     }
 
     private void openInformasiKostFragment() {
-        Fragment fragment = new informasi_kost();
+        Fragment fragment = new informasikostpemilik();
         navigateToFragment(fragment);
     }
 

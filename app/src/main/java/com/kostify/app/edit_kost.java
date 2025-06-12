@@ -1,86 +1,125 @@
 package com.kostify.app;
 
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link edit_kost#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.fragment.app.Fragment;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+
 public class edit_kost extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = "EditKostFragment";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private EditText alamat, linkWhatsapp, peraturan;
+    private Button btnSimpan;
 
-    public edit_kost() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment edit_kost.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static edit_kost newInstance(String param1, String param2) {
-        edit_kost fragment = new edit_kost();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private String keyKost, currentUserId;
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_kost, container, false);
 
-        // Tombol back
-        view.findViewById(R.id.ic_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backtopemilik();
-            }
-        });
+        // Firebase init
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        // Ambil ID kost dari SharedPreferences yang disimpan di fragment pemilik
+        SharedPreferences prefs = requireContext().getSharedPreferences("kostPrefs", Context.MODE_PRIVATE);
+        keyKost = prefs.getString("selectedKostId", "");
+
+        if (keyKost == null || keyKost.isEmpty()) {
+            Toast.makeText(getContext(), "ID Kost tidak ditemukan di SharedPreferences", Toast.LENGTH_SHORT).show();
+            return view;
+        }
+
+        FirebaseUser user = auth.getCurrentUser();
+        if (user == null) {
+            Toast.makeText(getContext(), "User belum login", Toast.LENGTH_SHORT).show();
+            return view;
+        }
+
+        currentUserId = user.getUid();
+
+        // Inisialisasi UI
+        alamat = view.findViewById(R.id.txtalamat);
+        linkWhatsapp = view.findViewById(R.id.txtlinkgrupwhatsapp);
+        peraturan = view.findViewById(R.id.txtperaturan);
+        btnSimpan = view.findViewById(R.id.btnsimpan);
+
+        view.findViewById(R.id.ic_back).setOnClickListener(v -> backToPemilik());
+        btnSimpan.setOnClickListener(v -> simpanData());
+
+        // Tampilkan data
+        tampilkanData();
 
         return view;
     }
 
-    private void backtopemilik() {
-        Pemilik pemilikFragment = new Pemilik();
 
+    private void tampilkanData() {
+        db.collection("kost").document(keyKost)
+                .get()
+                .addOnSuccessListener(document -> {
+                    if (document.exists()) {
+                        alamat.setText(document.getString("alamat"));
+                        peraturan.setText(document.getString("peraturan"));
+                        linkWhatsapp.setText(document.getString("link_grup"));
+                    } else {
+                        Toast.makeText(getContext(), "Data kost tidak ditemukan", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Gagal mengambil data kost", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Gagal mengambil data dari Firestore", e);
+                });
+    }
+
+    private void simpanData() {
+        String alamatVal = alamat.getText().toString().trim();
+        String peraturanVal = peraturan.getText().toString().trim();
+        String waLink = linkWhatsapp.getText().toString().trim();
+
+        if (alamatVal.isEmpty() || peraturanVal.isEmpty()) {
+            Toast.makeText(getContext(), "Semua field harus diisi", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        HashMap<String, Object> dataMap = new HashMap<>();
+        dataMap.put("alamat", alamatVal);
+        dataMap.put("peraturan", peraturanVal);
+        dataMap.put("link_grup", waLink);
+
+        db.collection("kost").document(keyKost)
+                .update(dataMap)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Data berhasil diperbarui", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Gagal memperbarui data", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Gagal update dokumen", e);
+                });
+    }
+
+    private void backToPemilik() {
+        Pemilik pemilikFragment = new Pemilik();
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameLayout, pemilikFragment)
                 .addToBackStack(null)
                 .commit();
     }
-
-
-
 }

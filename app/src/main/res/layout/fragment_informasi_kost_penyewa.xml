@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".informasikostpemilik">
+    tools:context=".informasikostpenyewa">
 
     <RelativeLayout
         android:id="@+id/kontainermenutop"
@@ -175,7 +175,7 @@
         android:textColor="@color/warna10"
         android:textSize="14sp"
         android:textStyle="normal"
-       />
+        />
 
 
 

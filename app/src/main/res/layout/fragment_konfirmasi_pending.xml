@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".edit_kost"
-    android:background="#f4f4f4">
+    tools:context=".Konfirmasi_pending">
+
 
     <RelativeLayout
         android:id="@+id/kontainermenutop"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_top"
@@ -24,10 +26,10 @@
             android:scaleType="fitCenter" />
 
         <TextView
-            android:id="@+id/texteditkost"
+            android:id="@+id/textpenyewaan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Kost"
+            android:text="Konfirmasi Penyewaan"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
             android:textSize="25sp"
@@ -36,23 +38,23 @@
     </RelativeLayout>
 
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_below="@+id/kontainermenutop"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/kontainermenutop">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="32dp">
-
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="15dp">
 
 
             <TextView
                 android:id="@+id/textinformasikost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
                 android:text="Informasi Kost"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -63,32 +65,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_below="@id/textinformasikost"
-                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/garis" />
 
 
 
 
 
+
+
             <TextView
-                android:id="@+id/textkontak"
+                android:id="@+id/textpenyewa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/garis"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="15dp"
-                android:text="Kontak"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@color/warna10" />
 
-            <TextView
-                android:id="@+id/textpemilik"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textkontak"
-                android:layout_marginHorizontal="15dp"
-                android:text="Pemilik : Fajar Nugroho"
+                android:text="Penyewa : Fajar Nugroho"
                 android:textColor="@color/warna10"
                 android:textSize="14sp" />
 
@@ -96,116 +88,83 @@
                 android:id="@+id/textgrupwhatsapp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textpemilik"
-                android:layout_marginHorizontal="15dp"
+                android:layout_below="@id/textpenyewa"
                 android:text="No.Whatsapp : 085748323741"
                 android:textColor="@color/warna10"
                 android:textSize="14sp" />
 
-
             <TextView
-                android:id="@+id/textalamat"
+                android:id="@+id/textkamar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textgrupwhatsapp"
                 android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="15dp"
-                android:text="Alamat Kost"
+                android:text="Kamar"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="@color/warna10" />
 
             <EditText
-                android:id="@+id/txtalamat"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_below="@id/textalamat"
-                android:layout_marginTop="8dp"
-                android:layout_marginHorizontal="15dp"
-                android:padding="10dp"
-                android:background="@drawable/backgroundedittextstroke1radius15"
-                android:maxLines="5"
-                android:gravity="top|start" />
-
-            <TextView
-                android:id="@+id/textlinkgrupwhatsapp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtalamat"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="15dp"
-                android:text="Link Grup Whatsapp"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@color/warna10" />
-
-            <EditText
-                android:id="@+id/txtlinkgrupwhatsapp"
+                android:id="@+id/txtkamar"
+                android:layout_below="@+id/textkamar"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@id/textlinkgrupwhatsapp"
-                android:layout_marginTop="8dp"
-                android:layout_marginHorizontal="15dp"
-                android:padding="10dp"
                 android:background="@drawable/backgroundedittextstroke1radius15"
-                android:maxLines="5"
-                android:gravity="top|start" />
+                android:layout_marginTop="8dp"/>
 
+            <TextView
+                android:id="@+id/textdurasisewa"
+                android:layout_below="@+id/txtkamar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Durasi Sewa"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/warna10"
+                android:layout_marginTop="1dp"/>
 
-
-
+            <Spinner
+                android:id="@+id/txtdurasisewa"
+                android:layout_below="@+id/textdurasisewa"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@drawable/backgroundedittextstroke1radius15"
+                android:layout_marginTop="8dp"/>
 
 
             <TextView
-                android:id="@+id/textperaturan"
+                android:id="@+id/textharga"
+                android:layout_below="@+id/txtdurasisewa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtlinkgrupwhatsapp"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="15dp"
-                android:text="Peraturan"
+                android:text="Harga Sewa / Bulan"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="@color/warna10" />
+                android:textColor="@color/warna10"
+                android:layout_marginTop="1dp"/>
 
             <EditText
-                android:id="@+id/txtperaturan"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_below="@id/textperaturan"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="20dp"
-                android:padding="10dp"
+                android:id="@+id/txtharga"
+                android:layout_below="@+id/textharga"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
                 android:background="@drawable/backgroundedittextstroke1radius15"
-                android:inputType="textMultiLine|textCapSentences"
-                android:gravity="top|start"
-                android:lineSpacingMultiplier="1.5"
-                android:maxLines="5"
-                android:scrollbars="vertical"
-                android:overScrollMode="ifContentScrolls"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:singleLine="false"
-                />
+                android:layout_marginTop="8dp"/>
 
 
             <Button
                 android:id="@+id/btnsimpan"
-                android:layout_below="@id/txtperaturan"
+                android:layout_below="@id/txtharga"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginHorizontal="30dp"
                 android:text="Simpan"
                 android:background="@drawable/backgroundbutton"
                 android:backgroundTint="@color/warna7"
                 android:textSize="14sp"
                 android:textColor="@color/white" />
-
         </RelativeLayout>
     </ScrollView>
-
 
 </RelativeLayout>

@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.google.gms.google.services) // Plugin Google Services
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -38,27 +38,29 @@ android {
 }
 
 dependencies {
-    // UI & Layout
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
 
-    // Firebase Core
+    // Firebase Analytics & Core - pakai tanda kurung dan string
+    implementation("com.google.firebase:firebase-analytics-ktx:21.3.0")
     implementation(libs.firebase.firestore)
-    implementation (libs.play.services.auth.v2100)
-
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
-    implementation(libs.firebase.firestore)
 
-    // Google Sign-In (jika digunakan)
+    // Google Sign-In
     implementation(libs.googleid)
     implementation(libs.credentials)
     implementation(libs.credentials.play.services.auth)
     implementation(libs.play.services.auth)
+
+    // Navigation
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+
+    // Google Mobile Ads (AdMob) - harus konsisten, pakai tanda petik satu karena tidak ada di libs
+    implementation("com.google.android.gms:play-services-ads:22.6.0")
 
     // Testing
     testImplementation(libs.junit)

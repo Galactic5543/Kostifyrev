@@ -2,7 +2,6 @@ package com.kostify.app;
 
 import android.os.Bundle;
 import android.view.View;
-import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -20,6 +19,7 @@ public class menu_utama_navigasi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityNavigasiUtamaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         // Ambil data fragment tujuan dari Intent
         String fragmentTujuan = getIntent().getStringExtra("fragment");
@@ -74,7 +74,7 @@ public class menu_utama_navigasi extends AppCompatActivity {
 
     // Fungsi pengecekan fragment mana yang perlu menyembunyikan bottom nav
     private void updateBottomNavVisibility(Fragment fragment) {
-        if (fragment instanceof informasi_kost ||
+        if (fragment instanceof informasikostpemilik ||
                 fragment instanceof Penyewa ||
                 fragment instanceof Pemilik ||
                 fragment instanceof Profil) {

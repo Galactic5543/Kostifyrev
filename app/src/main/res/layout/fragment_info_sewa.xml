@@ -28,7 +28,7 @@
             android:id="@+id/textinformasikost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Informasi Kost"
+            android:text="Informasi Sewa"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
             android:textSize="25sp"
