@@ -127,7 +127,7 @@
                     android:id="@+id/ic_kamar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_kamar"
+                    android:src="@drawable/ic_kamar_hijau"
                     android:layout_marginRight="5dp"/>
 
                 <TextView

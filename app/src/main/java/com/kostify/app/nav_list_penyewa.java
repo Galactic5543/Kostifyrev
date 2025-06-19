@@ -62,6 +62,21 @@ public class nav_list_penyewa extends AppCompatActivity {
         binding.icBack.setOnClickListener(v -> finish());
     }
 
+    public void goToKonfirmasiFragment(String nama, String tanggal, String idUser) {
+        Konfirmasi_pending konfirmasiFragment = new Konfirmasi_pending();
+        Bundle bundle = new Bundle();
+        bundle.putString("nama", nama);
+        bundle.putString("tanggal", tanggal);
+        bundle.putString("id_user", idUser);
+        konfirmasiFragment.setArguments(bundle);
+
+        replaceFragment(konfirmasiFragment, true); // ⬅️ agar bisa kembali
+    }
+
+
+
+
+
     public void replaceFragment(Fragment fragment, boolean addToBackStack) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -78,6 +93,8 @@ public class nav_list_penyewa extends AppCompatActivity {
 
     private void updateUIVisibility(Fragment fragment) {
         View topMenu = findViewById(R.id.kontainermenutop);
+        View searchBar = findViewById(R.id.search); // ⬅️ Tambahkan ini
+
         if (topMenu != null) {
             if (fragment instanceof list_penyewa || fragment instanceof pending) {
                 topMenu.setVisibility(View.VISIBLE);
@@ -91,6 +108,14 @@ public class nav_list_penyewa extends AppCompatActivity {
                 binding.topnav.setVisibility(View.VISIBLE);
             } else {
                 binding.topnav.setVisibility(View.GONE);
+            }
+        }
+
+        if (searchBar != null) {
+            if (fragment instanceof list_penyewa || fragment instanceof pending) {
+                searchBar.setVisibility(View.VISIBLE);
+            } else {
+                searchBar.setVisibility(View.GONE);
             }
         }
     }

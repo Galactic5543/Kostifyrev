@@ -87,7 +87,7 @@ public class join_kost extends Fragment {
         penyewaData.put("status", "pending");
         penyewaData.put("waktu_pengajuan", FieldValue.serverTimestamp());
 
-        kostRef.collection("penyewa")
+        kostRef.collection("pending")
                 .add(penyewaData)
                 .addOnSuccessListener(docRef -> {
                     Toast.makeText(getContext(), "Pengajuan berhasil, menunggu persetujuan", Toast.LENGTH_SHORT).show();

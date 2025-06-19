@@ -570,6 +570,34 @@
                     android:gravity="center"/>
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginHorizontal="4dp">
+
+                <ImageButton
+                    android:id="@+id/mnkamar"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bgmenu"
+                    android:src="@drawable/ic_kamar"
+                    android:scaleType="centerInside"
+                    android:contentDescription="Btn2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kamar"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
+            </LinearLayout>
+
         </LinearLayout>
 
 

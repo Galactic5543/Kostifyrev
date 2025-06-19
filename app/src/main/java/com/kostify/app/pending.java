@@ -39,15 +39,36 @@ public class pending extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerPending);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new RecyclerViewAdapter(inflater);
+
+
+        adapter = new RecyclerViewAdapter(inflater, item -> {
+            Fragment konfirmasiFragment = new Konfirmasi_pending();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("nama", item.nama);
+            bundle.putString("tanggal", item.tanggal);
+            bundle.putString("id_user", item.idUser); // ⬅️ kirim id_user ke Konfirmasi_pending
+            konfirmasiFragment.setArguments(bundle);
+
+            if (getActivity() instanceof nav_list_penyewa) {
+                ((nav_list_penyewa) getActivity()).goToKonfirmasiFragment(item.nama, item.tanggal,item.idUser);
+            }
+        });
+
+
+
         recyclerView.setAdapter(adapter);
 
         textKosong = view.findViewById(R.id.textKosong);
 
+
         loadPendingData();
+
+
 
         return view;
     }
+
 
     private void loadPendingData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -59,7 +80,7 @@ public class pending extends Fragment {
         if (kostId != null) {
             db.collection("kost")
                     .document(kostId)
-                    .collection("penyewa")
+                    .collection("pending")
                     .whereEqualTo("status", "pending")
                     .get()
                     .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -69,17 +90,14 @@ public class pending extends Fragment {
                         for (DocumentSnapshot document : queryDocumentSnapshots) {
                             String nama = document.getString("nama_user");
                             String tanggal = convertTimestamp(document.get("waktu_pengajuan"));
-                            if (nama != null && tanggal != null) {
-                                dataList.add(new ModelPending(nama, tanggal));
+                            String idUser = document.getString("id_user"); // ⬅️ ambil id_user
+
+                            if (nama != null && tanggal != null && idUser != null) {
+                                dataList.add(new ModelPending(nama, tanggal, idUser));
                             }
                         }
 
-                        if (dataList.isEmpty()) {
-                            textKosong.setVisibility(View.VISIBLE);
-                        } else {
-                            textKosong.setVisibility(View.GONE);
-                        }
-
+                        textKosong.setVisibility(dataList.isEmpty() ? View.VISIBLE : View.GONE);
                         adapter.setItems(dataList);
                     })
                     .addOnFailureListener(e -> Log.e("FIRESTORE_ERROR", "Gagal mengambil data: " + e.getMessage()));
@@ -87,6 +105,7 @@ public class pending extends Fragment {
             Log.e("PendingFragment", "ID kost dari SharedPreferences null!");
         }
     }
+
 
     private String convertTimestamp(Object waktuObj) {
         if (waktuObj instanceof Timestamp) {
@@ -100,9 +119,16 @@ public class pending extends Fragment {
     private static class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
         private final LayoutInflater inflater;
         private final List<ModelPending> items = new ArrayList<>();
+        private final OnItemClickListener listener;
 
-        public RecyclerViewAdapter(LayoutInflater inflater) {
+        // Interface untuk klik
+        interface OnItemClickListener {
+            void onItemClick(ModelPending item);
+        }
+
+        public RecyclerViewAdapter(LayoutInflater inflater, OnItemClickListener listener) {
             this.inflater = inflater;
+            this.listener = listener;
         }
 
         public void setItems(List<ModelPending> newItems) {
@@ -123,6 +149,11 @@ public class pending extends Fragment {
             ModelPending item = items.get(position);
             holder.nama.setText(item.nama);
             holder.tanggal.setText("Tanggal Pengajuan : " + item.tanggal);
+
+            Log.d("DEBUG_PENDING", "Mengirim ke Konfirmasi_pending: nama=" + item.nama + ", id_user=" + item.idUser);
+
+            // Klik item
+            holder.itemView.setOnClickListener(v -> listener.onItemClick(item));
         }
 
         @Override
@@ -143,12 +174,15 @@ public class pending extends Fragment {
         }
     }
 
-    private static class ModelPending {
-        String nama, tanggal;
 
-        public ModelPending(String nama, String tanggal) {
+    private static class ModelPending {
+        String nama, tanggal, idUser;
+
+        public ModelPending(String nama, String tanggal, String idUser) {
             this.nama = nama;
             this.tanggal = tanggal;
+            this.idUser = idUser;
         }
     }
 }
+

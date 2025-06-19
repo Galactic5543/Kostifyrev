@@ -123,7 +123,7 @@ public class tambah_kost extends Fragment {
 
             Map<String, Object> dataKamar = new HashMap<>();
             dataKamar.put("nama_kamar", namaKamar);
-            dataKamar.put("status", "");
+            dataKamar.put("status", "Kosong");
             dataKamar.put("penyewa", "-");
             dataKamar.put("harga", "-");
             dataKamar.put("fasilitas", "-");

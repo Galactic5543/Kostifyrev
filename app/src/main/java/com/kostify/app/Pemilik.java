@@ -117,8 +117,7 @@ public class Pemilik extends Fragment {
                             prefs.edit().putString("selectedKostId", documentId).apply();
                         }
 
-                    } else {
-                        Toast.makeText(getContext(), "Kost tidak ditemukan", Toast.LENGTH_SHORT).show();
+
                     }
                 })
                 .addOnFailureListener(e -> {
