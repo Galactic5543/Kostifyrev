@@ -168,6 +168,7 @@
                 android:layout_below="@+id/textharga"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
+                android:paddingHorizontal="10dp"
                 android:background="@drawable/backgroundedittextstroke1radius15"
                 android:layout_marginTop="8dp"/>
 
