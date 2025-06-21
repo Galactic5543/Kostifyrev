@@ -469,30 +469,30 @@
                 android:gravity="center"/>
         </LinearLayout>
 
-        <!-- BTN 4 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+
             android:orientation="vertical"
             android:gravity="center"
             android:layout_marginHorizontal="4dp">
 
             <ImageButton
-                android:id="@+id/mpembayaran"
+                android:id="@+id/mnnotifikasi"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/bgmenu"
-                android:src="@drawable/ic_pembayaran"
+                android:src="@drawable/ic_notifikasi"
                 android:scaleType="centerInside"
-                android:contentDescription="Btn4" />
+                android:contentDescription="Btn1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pembayaran"
-                android:textStyle="bold"
+                android:text="Notifikasi"
                 android:textSize="12sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:gravity="center"/>
         </LinearLayout>
@@ -514,33 +514,7 @@
             android:paddingHorizontal="10dp">
 
             <!-- BTN 1 -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
 
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginHorizontal="4dp">
-
-                <ImageButton
-                    android:id="@+id/mnnotifikasi"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/bgmenu"
-                    android:src="@drawable/ic_notifikasi"
-                    android:scaleType="centerInside"
-                    android:contentDescription="Btn1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Notifikasi"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:gravity="center"/>
-            </LinearLayout>
 
             <!-- BTN 2 -->
             <LinearLayout

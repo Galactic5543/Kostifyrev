@@ -125,8 +125,6 @@ public class tambah_kost extends Fragment {
             dataKamar.put("nama_kamar", namaKamar);
             dataKamar.put("status", "Kosong");
             dataKamar.put("penyewa", "-");
-            dataKamar.put("harga", "-");
-            dataKamar.put("fasilitas", "-");
 
             db.collection("kost").document(kostId)
                     .collection("kamar")

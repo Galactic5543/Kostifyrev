@@ -93,7 +93,7 @@ public class Konfirmasi_pending extends Fragment {
             dataPenyewaan.put("nama_penyewa", namaPenyewa);
             dataPenyewaan.put("kamar", kamarDipilih);
             dataPenyewaan.put("durasi", durasi);
-            dataPenyewaan.put("harga", harga);
+            dataPenyewaan.put("pembayaran sewa", harga);
             dataPenyewaan.put("tanggal_konfirmasi", FieldValue.serverTimestamp());
 
             db.collection("kost")
@@ -117,7 +117,6 @@ public class Konfirmasi_pending extends Fragment {
                                         Map<String, Object> updateKamar = new HashMap<>();
                                         updateKamar.put("status", "Terisi");
                                         updateKamar.put("penyewa", namaPenyewa);
-                                        updateKamar.put("harga", harga);
                                         updateKamar.put("id_penyewa", idUser);
 
                                         db.collection("kost")
