@@ -15,7 +15,7 @@
     android:background="@drawable/bg_top"
     android:paddingBottom="15dp">
 
-    <!-- Teks Notifikasi di tengah -->
+
     <RelativeLayout
         android:id="@+id/titleback"
         android:layout_width="match_parent"

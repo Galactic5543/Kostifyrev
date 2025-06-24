@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_below="@id/garis"
-        android:text="Jl. Mahesa, Dusun II Karangrau, Karangrau, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah"
+        android:text=""
         android:textColor="@color/warna10"
         android:textSize="14sp"
         android:textStyle="normal"
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_below="@id/textkontak"
-        android:text="Pemilik : Fajar Nugroho"
+        android:text="Pemilik : "
         android:textColor="@color/warna10"
         android:textSize="14sp"
         android:textStyle="normal"
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_below="@id/textpemilik"
-        android:text="No.Whatsapp : 085748323741"
+        android:text="No.Whatsapp : "
         android:textColor="@color/warna10"
         android:textSize="14sp"
         android:textStyle="normal"
@@ -127,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_below="@id/textlinkgrupwhatsapp"
-        android:text="https://chat.whatsapp.com/Cnjxns5XKIL1s6gLnLrclg"
+        android:text=""
         android:textColor="@color/warna10"
         android:textSize="14sp"
         android:textStyle="normal"
@@ -165,12 +165,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
-        android:text="1.) Jam kunjungan tamu hanya diperbolehkan pukul 08.00–22.00 WIB. \n 2.)Tamu dilarang menginap tanpa izin pemilik kost.
-        \n 3.)Penghuni wajib menjaga kebersihan kamar dan area bersama.
-        \n 4.)Dilarang membawa hewan peliharaan ke dalam area kost.
-        \n 5.)Dilarang membuat keributan atau memutar musik keras setelah pukul 21.00 WIB.
-        \n 6.)Dilarang membawa atau mengonsumsi minuman keras dan obat terlarang.
-
+        android:text="
 "
         android:textColor="@color/warna10"
         android:textSize="14sp"

@@ -8,16 +8,24 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class Penyewa extends Fragment {
 
     public Penyewa() {
         // Required empty public constructor
     }
+    private AdView mAdView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_penyewa, container, false);
+
+        mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         // Navigasi ke Informasi Kost
         view.findViewById(R.id.mn_info_kost).setOnClickListener(v -> openInformasiKostFragment());
@@ -30,9 +38,6 @@ public class Penyewa extends Fragment {
 
         // Navigasi ke Info Sewa
         view.findViewById(R.id.mn_infosewa).setOnClickListener(v -> openInfoSewaFragment());
-
-        // Navigasi ke Pembayaran
-        view.findViewById(R.id.mn_pembayaran).setOnClickListener(v -> opentagihan());
 
         view.findViewById(R.id.mnnotifikasi).setOnClickListener(v -> opennotifikasi());
 
@@ -65,10 +70,7 @@ public class Penyewa extends Fragment {
         navigateToFragment(fragment);
     }
 
-    private void opentagihan() {
-        Intent intent = new Intent(getActivity(), navigasi_pembayaran.class);
-        startActivity(intent);
-    }
+
 
 
 
@@ -83,11 +85,7 @@ public class Penyewa extends Fragment {
         startActivity(intent);
     }
 
-    private void openriwayattagihan() {
-        Intent intent = new Intent(getActivity(), navigasi_pembayaran.class);
-        intent.putExtra("default_fragment", "Riwayat");
-        startActivity(intent);
-    }
+
 
     private void opennotifikasi() {
         Fragment fragment = new Notifikasi();

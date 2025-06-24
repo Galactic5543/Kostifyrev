@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="8dp"
+    android:background="@drawable/bgradius15"
+    android:backgroundTint="@color/white"
+    android:elevation="7dp"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/ic_notif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_notif" />
+
+    <TextView
+        android:id="@+id/namapenghuni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/ic_notif"
+        android:layout_marginStart="10dp"
+        android:text="Fajar Nugroho"
+        android:textColor="@color/warna10"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/kamar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/namapenghuni"
+        android:layout_toEndOf="@id/ic_notif"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="10dp"
+        android:text="Kamar 02"
+        android:textColor="@color/warna10"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textperiodesewa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/kamar"
+        android:layout_toEndOf="@id/ic_notif"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="10dp"
+        android:text="Masa Sewa Hingga 28/06/2025"
+        android:textColor="@color/warna10"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/texttanggalmasuk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textperiodesewa"
+        android:layout_toEndOf="@id/ic_notif"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="10dp"
+        android:text="Bergabung pada 01/06/2025"
+        android:textColor="@color/warna10"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textdetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/texttanggalmasuk"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="20dp"
+        android:text="*Detail Sewa"
+        android:textColor="@color/warna10"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+</RelativeLayout>

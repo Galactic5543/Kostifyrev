@@ -59,7 +59,7 @@ public class informasikostpemilik extends Fragment {
             db.collection("kost").document(idKost).get()
                     .addOnSuccessListener(doc -> {
                         if (doc.exists()) {
-                            String nama = doc.getString("nama");
+                            String nama = doc.getString("nama_kost");
                             String alamatKost = doc.getString("alamat");
                             String link = doc.getString("link_grup");
                             String peraturan = doc.getString("peraturan");

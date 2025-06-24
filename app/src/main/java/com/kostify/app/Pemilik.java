@@ -1,5 +1,7 @@
 package com.kostify.app;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +21,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -34,7 +38,9 @@ public class Pemilik extends Fragment {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
 
-    private TextView namakostTextView, alamatTextView, angkajumlahkamarTextView;
+    private AdView mAdView;
+
+    private TextView namakostTextView, alamatTextView, angkajumlahkamarTextView,idkostTextView,angkamarkosongTextView,angakamarisiTextView;
     private Spinner gantikost;
     private ArrayList<String> kostNames; // List nama kost
     private String selectedKostId;       // Menyimpan ID kost yang dipilih
@@ -51,11 +57,20 @@ public class Pemilik extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_pemilik, container, false);
 
+
+        mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         // Inisialisasi Firebase
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
         // Inisialisasi komponen UI
+        angkamarkosongTextView = view.findViewById(R.id.angkakamarkosong);
+        angakamarisiTextView = view.findViewById(R.id.angkakamarisi);
+
+        idkostTextView = view.findViewById(R.id.idkost);
         namakostTextView = view.findViewById(R.id.namakost);
         alamatTextView = view.findViewById(R.id.alamat);
         angkajumlahkamarTextView = view.findViewById(R.id.angkajumlahkamar);
@@ -85,6 +100,16 @@ public class Pemilik extends Fragment {
             }
         });
 
+        idkostTextView.setOnClickListener(v -> {
+            String idText = selectedKostId; // atau: idkostTextView.getText().toString()
+            ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("ID Kost", idText);
+            clipboard.setPrimaryClip(clip);
+
+            Toast.makeText(getContext(), "ID Kost disalin: " + idText, Toast.LENGTH_SHORT).show();
+        });
+
+
         // Tombol hapus kost
         view.findViewById(R.id.btnhapuskost).setOnClickListener(v -> hapusKost());
 
@@ -95,6 +120,7 @@ public class Pemilik extends Fragment {
         view.findViewById(R.id.mnpenyewa).setOnClickListener(v -> openlistpenyewa());
         view.findViewById(R.id.mneditkost).setOnClickListener(v -> openeditkost());
         view.findViewById(R.id.mnnotifikasi).setOnClickListener(v -> opennotifikasi());
+        view.findViewById(R.id.mnkamar).setOnClickListener(v -> openkamar());
 
         return view;
     }
@@ -174,6 +200,34 @@ public class Pemilik extends Fragment {
                 });
     }
 
+
+
+    private void fetchJumlahKamar(String kostId) {
+        CollectionReference kamarRef = db.collection("kost")
+                .document(kostId)
+                .collection("kamar");
+
+        kamarRef.get().addOnSuccessListener(querySnapshots -> {
+            int jumlahKosong = 0;
+            int jumlahIsi = 0;
+
+            for (QueryDocumentSnapshot snapshot : querySnapshots) {
+                String status = snapshot.getString("status");
+                if ("kosong".equalsIgnoreCase(status)) {
+                    jumlahKosong++;
+                } else if ("Terisi".equalsIgnoreCase(status)) {
+                    jumlahIsi++;
+                }
+            }
+
+            // Set ke TextView
+            angkamarkosongTextView.setText(String.valueOf(jumlahKosong));
+            angakamarisiTextView.setText(String.valueOf(jumlahIsi));
+        }).addOnFailureListener(e -> {
+            Toast.makeText(getContext(), "Gagal mengambil data kamar", Toast.LENGTH_SHORT).show();
+        });
+    }
+
     // Mengupdate data detail kost saat dipilih
     private void updateKostData(String kostName) {
         if (auth.getCurrentUser() == null) {
@@ -191,13 +245,25 @@ public class Pemilik extends Fragment {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         QueryDocumentSnapshot documentSnapshot = (QueryDocumentSnapshot) queryDocumentSnapshots.getDocuments().get(0);
                         selectedKostId = documentSnapshot.getId();
-
+                        fetchJumlahKamar(selectedKostId);
                         String alamat = documentSnapshot.getString("alamat");
                         Long totalKamar = documentSnapshot.getLong("jumlah_kamar");
 
                         namakostTextView.setText(kostName);
                         setTextOrDefault(alamat, alamatTextView, "Alamat tidak tersedia");
                         angkajumlahkamarTextView.setText(totalKamar != null ? String.valueOf(totalKamar) : "0");
+
+                        // Tampilkan ID Kost
+                        idkostTextView.setText("ID Kost: " + selectedKostId);
+
+                        // Aktifkan copy saat klik
+                        idkostTextView.setOnClickListener(v -> {
+                            ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                            ClipData clip = ClipData.newPlainText("ID Kost", selectedKostId);
+                            clipboard.setPrimaryClip(clip);
+                            Toast.makeText(getContext(), "ID Kost disalin: " + selectedKostId, Toast.LENGTH_SHORT).show();
+                        });
+
                     } else {
                         Log.d("Pemilik", "Dokumen tidak ditemukan.");
                         setEmptyState();
@@ -208,6 +274,7 @@ public class Pemilik extends Fragment {
                     setEmptyState();
                 });
     }
+
 
     // Menghapus kost yang dipilih dari Firestore
     private void hapusKost() {
@@ -263,7 +330,6 @@ public class Pemilik extends Fragment {
 
     private void openinfoKost() {
         informasikostpemilik fragment = new informasikostpemilik();
-
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frameLayout, fragment);
         transaction.addToBackStack(null);
@@ -274,6 +340,10 @@ public class Pemilik extends Fragment {
 
     private void openpengumuman() {
         navigateToFragment(new pengumuman());
+    }
+
+    private void openkamar() {
+        navigateToFragment(new list_Kamar());
     }
 
 

@@ -95,6 +95,8 @@ public class Konfirmasi_pending extends Fragment {
             dataPenyewaan.put("durasi", durasi);
             dataPenyewaan.put("pembayaran sewa", harga);
             dataPenyewaan.put("tanggal_konfirmasi", FieldValue.serverTimestamp());
+            dataPenyewaan.put("perpanjang_terakhir", FieldValue.serverTimestamp());
+
 
             db.collection("kost")
                     .document(idKost)

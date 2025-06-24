@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F4F4"
@@ -20,7 +21,7 @@
             android:id="@+id/textinformasikost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profil &amp; Pengaturan"
+            android:text="Profil"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
             android:textSize="25sp"
@@ -28,283 +29,186 @@
             android:textColor="@color/warna10"/>
     </RelativeLayout>
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/profileImage"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_below="@id/kontainermenutop"
+
+    <ImageButton
+        android:id="@+id/iconakun"
         android:layout_centerHorizontal="true"
-
-        android:layout_marginTop="15dp"
-        android:src="@drawable/profil"
-        android:adjustViewBounds="true"
+        android:layout_below="@+id/kontainermenutop"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bgprofil"
+        android:src="@drawable/ic_profile"
         android:scaleType="centerInside"
-        style="@style/ImageViewMaskStyle" />
+        android:contentDescription="Btn1" />
 
     <TextView
-        android:layout_below="@+id/profileImage"
-        android:id="@+id/namauser"
+        android:id="@+id/textnamaakun"
         android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_height="wrap_content"
-        android:text="Fajar Nugroho"
-        android:layout_marginHorizontal="15dp"
-        android:textSize="25sp"
+        android:layout_below="@+id/iconakun"
+        android:layout_centerHorizontal="true"
+        android:text="Fajar"
         android:textStyle="bold"
-        android:textColor="@color/warna10"/>
+        android:textSize="15sp"
+        android:textColor="@color/warna10"
+        android:layout_marginLeft="10dp"/>
 
     <TextView
-        android:layout_below="@+id/namauser"
         android:id="@+id/nowhatsapp"
         android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_height="wrap_content"
-        android:text="085384952193"
-        android:layout_marginHorizontal="15dp"
-        android:textSize="15sp"
-        android:textColor="@color/warna10"/>
+        android:layout_below="@+id/textnamaakun"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="3dp"
+        android:text="085700780091"
+        android:textColor="@color/warna10"
+        android:textSize="12sp" />
 
 
 
-    <ScrollView
-        android:layout_below="@id/nowhatsapp"
-        android:layout_marginTop="10dp"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="10dp"
-            android:layout_below="@+id/textdashboardpenyewa">
+        android:layout_height="wrap_content"
+        android:id="@+id/kontainerkontent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@drawable/bgradius15"
+        android:backgroundTint="@color/white"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/nowhatsapp"
 
-            <!-- ===================== Akun ===================== -->
-            <RelativeLayout
+        android:layout_marginHorizontal="4dp">
+
+        <RelativeLayout
+            android:id="@+id/kontainermnakun"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <ImageButton
                 android:id="@+id/mnakun"
-                android:layout_width="match_parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bgmenu"
+                android:src="@drawable/ic_akun"
+                android:scaleType="centerInside"
+                android:contentDescription="Btn1" />
+
+            <TextView
+                android:id="@+id/textmnakun"
+                android:layout_toEndOf="@+id/mnakun"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:text="Akun"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/warna10"
+                android:layout_marginLeft="10dp"/>
 
-                <ImageView
-                    android:id="@+id/ic_infokost"
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_akun"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter" />
-
-                <TextView
-                    android:id="@+id/textmenuakun"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/ic_infokost"
-                    android:layout_marginStart="8dp"
-                    android:layout_centerInParent="true"
-                    android:text="Akun"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/warna10" />
-
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/arrow"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter" />
-            </RelativeLayout>
-
-            <!-- Garis pemisah -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/garis" />
-
-            <!-- ===================== Notifikasi ===================== -->
-            <RelativeLayout
-                android:id="@+id/mnnotifikasi"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:elevation="2dp">
+                android:layout_below="@+id/textmnakun"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="3dp"
+                android:textSize="12sp"
+                android:textColor="@color/warna10"
+                android:layout_toEndOf="@+id/mnakun"
+                android:text="Informasi data  dan akun"/>
 
-                <ImageView
-                    android:id="@+id/ic_pengajuan"
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_norifikasi"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter" />
-
-                <TextView
-                    android:id="@+id/textmenunotifikasi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/ic_pengajuan"
-                    android:layout_marginStart="8dp"
-                    android:layout_centerInParent="true"
-                    android:text="Notifikasi"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/warna10" />
-
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/arrow"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter" />
-            </RelativeLayout>
-
-            <!-- Garis pemisah -->
             <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/garis" />
+                android:id="@+id/arrow1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="15dp"
+                android:background="@drawable/ic_arrow" />
 
-            <!-- ===================== Metode Pembayaran ===================== -->
-            <RelativeLayout
-                android:id="@+id/mnmetodepembayaran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:elevation="2dp">
+        </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/ic_sosial"
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_metodepembayaran"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter" />
+        <View
+            android:id="@+id/garis"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/kontainermnakun"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/garis" />
 
-                <TextView
-                    android:id="@+id/textmenumetodepembayaran"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/ic_sosial"
-                    android:layout_marginStart="8dp"
-                    android:text="Metode Pembayaran"
-                    android:textSize="16sp"
-                    android:layout_centerInParent="true"
-                    android:textStyle="bold"
-                    android:textColor="@color/warna10" />
+        <RelativeLayout
+            android:id="@+id/kontainermnlogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/garis"
+            android:layout_marginTop="0dp"
+            android:padding="15dp">
 
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/arrow"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter" />
-            </RelativeLayout>
-
-            <!-- Garis pemisah -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/garis" />
-
-            <!-- ===================== tentang aplikasi SEWA ===================== -->
-            <RelativeLayout
-                android:id="@+id/mntentangaplikasi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:elevation="2dp">
-
-                <ImageView
-                    android:id="@+id/ic_infosewa"
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_tentangaplikasi"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter" />
-
-                <TextView
-                    android:id="@+id/textmenutentangaplikasi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/ic_infosewa"
-                    android:layout_marginStart="8dp"
-                    android:text="Tentang Aplikasi"
-                    android:layout_centerInParent="true"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/warna10" />
-
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/arrow"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter" />
-            </RelativeLayout>
-
-            <!-- Garis pemisah -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/garis" />
-
-            <!-- ===================== logout ===================== -->
-            <RelativeLayout
+            <ImageButton
                 android:id="@+id/mnlogout"
-                android:layout_width="match_parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bgmenu"
+                android:contentDescription="Btn1"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_logout" />
+
+            <TextView
+                android:id="@+id/textmnlogout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:elevation="2dp">
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/mnlogout"
+                android:text="Logout"
+                android:textColor="@color/warna10"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/ic_pembayaran"
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_logout"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textmnlogout"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@+id/mnlogout"
+                android:text="Keluar akun"
+                android:textColor="@color/warna10"
+                android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/textmenulogout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/ic_pembayaran"
-                    android:layout_marginStart="8dp"
-                    android:text="Logout"
-                    android:textSize="16sp"
-                    android:layout_centerInParent="true"
-                    android:textStyle="bold"
-                    android:textColor="@color/warna10" />
+            <View
+                android:id="@+id/arrow2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="15dp"
+                android:background="@drawable/ic_arrow" />
+
+        </RelativeLayout>
 
 
-            </RelativeLayout>
 
-        </LinearLayout>
-    </ScrollView>
+    </RelativeLayout>
+
+    <!-- Iklan -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_below="@+id/kontainerkontent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id" />
+
+
+
 
 
 </RelativeLayout>

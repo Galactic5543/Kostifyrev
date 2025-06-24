@@ -37,7 +37,7 @@
         android:id="@+id/textcaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Masukkan Kode Kost untuk bergabung sebagai penghuni aktif"
+        android:text="Masukkan Id Kost untuk bergabung sebagai penghuni aktif"
         android:layout_below="@+id/textkode"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
@@ -63,7 +63,7 @@
         android:padding="2dp"
         android:textColor="@color/black"
         android:textAlignment="center"
-        android:hint="0"
+        android:hint="Masukkan Id Kost"
         android:textColorHint="@color/abu"/>
 
 
