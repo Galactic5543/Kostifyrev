@@ -1,40 +1,200 @@
 package com.kostify.app;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class pengajuan_sewa extends Fragment {
 
-    public pengajuan_sewa() {
-        // Konstruktor kosong
-    }
+    private Spinner dropdownDurasi;
+    private EditText txtAlasan;
+    private Button btnAjukan;
+    private TextView namaKost, kamar, tenggat, hari;
+    private ProgressBar progressBar;
+    private FirebaseFirestore db;
+
+    public pengajuan_sewa() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate layout satu kali saja
         View view = inflater.inflate(R.layout.fragment_pengajuan_sewa, container, false);
 
-        // Inisialisasi Spinner
-        Spinner gantikost = view.findViewById(R.id.dropdownperpanjangan);
+        db = FirebaseFirestore.getInstance();
+
+        // Inisialisasi komponen UI
+        dropdownDurasi = view.findViewById(R.id.dropdownperpanjangan);
+        txtAlasan = view.findViewById(R.id.txtalasanperpanjangan);
+        btnAjukan = view.findViewById(R.id.btnajukanperpanjangansewa);
+        namaKost = view.findViewById(R.id.namakost);
+        kamar = view.findViewById(R.id.kamar);
+        tenggat = view.findViewById(R.id.tenggat);
+        hari = view.findViewById(R.id.hari);
+        progressBar = view.findViewById(R.id.progressewa);
+
+        // Isi spinner durasi dari array
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.list_durasi_perpanjangan,
                 android.R.layout.simple_spinner_item
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        gantikost.setAdapter(adapter);
+        dropdownDurasi.setAdapter(adapter);
 
-        return view; // Kembalikan view yang sudah dimodifikasi
+        ambilDataSewaSaatIni();
+
+        btnAjukan.setOnClickListener(v -> ajukanPerpanjangan());
+
+        return view;
+    }
+
+    private void ambilDataSewaSaatIni() {
+        String userId = FirebaseAuth.getInstance().getUid();
+        if (userId == null) return;
+
+        db.collection("kost").get().addOnSuccessListener(kostSnapshot -> {
+            for (DocumentSnapshot kostDoc : kostSnapshot.getDocuments()) {
+                String idKost = kostDoc.getId();
+
+                db.collection("kost").document(idKost)
+                        .collection("penyewa")
+                        .whereEqualTo("id_user", userId)
+                        .get()
+                        .addOnSuccessListener(penyewaSnapshot -> {
+                            if (!penyewaSnapshot.isEmpty()) {
+                                DocumentSnapshot penyewaDoc = penyewaSnapshot.getDocuments().get(0);
+
+                                String nama = kostDoc.getString("nama_kost");
+                                String namaKamar = penyewaDoc.getString("kamar");
+                                String durasi = penyewaDoc.getString("durasi");
+                                Timestamp tanggalAwal = penyewaDoc.getTimestamp("perpanjang_terakhir");
+
+                                namaKost.setText(nama != null ? nama : "Kost -");
+                                kamar.setText(namaKamar != null ? namaKamar : "Kamar -");
+
+                                if (tanggalAwal != null && durasi != null) {
+                                    Date awal = tanggalAwal.toDate();
+                                    String akhir = hitungTenggat(awal, durasi);
+                                    tenggat.setText("Hingga " + akhir);
+
+                                    int sisa = hitungHariSisa(awal, durasi);
+                                    hari.setText(sisa + " Hari");
+                                    progressBar.setMax(sisa);
+                                    progressBar.setProgress(sisa);
+                                } else {
+                                    tenggat.setText("Hingga -");
+                                    hari.setText("- Hari");
+                                }
+                            }
+                        });
+            }
+        });
+    }
+
+    private void ajukanPerpanjangan() {
+        String userId = FirebaseAuth.getInstance().getUid();
+        if (userId == null) {
+            Toast.makeText(getContext(), "User belum login", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String durasi = dropdownDurasi.getSelectedItem().toString();
+        String alasan = txtAlasan.getText().toString().trim();
+
+        if (TextUtils.isEmpty(durasi)) {
+            Toast.makeText(getContext(), "Pilih durasi perpanjangan", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        db.collection("kost").get().addOnSuccessListener(kostSnapshot -> {
+            for (DocumentSnapshot kostDoc : kostSnapshot.getDocuments()) {
+                String idKost = kostDoc.getId();
+
+                db.collection("kost").document(idKost)
+                        .collection("penyewa")
+                        .whereEqualTo("id_user", userId)
+                        .get()
+                        .addOnSuccessListener(penyewaSnapshot -> {
+                            if (!penyewaSnapshot.isEmpty()) {
+                                Map<String, Object> data = new HashMap<>();
+                                data.put("id_user", userId);
+                                data.put("durasi", durasi);
+                                data.put("alasan", alasan.isEmpty() ? "-" : alasan);
+                                data.put("waktu_pengajuan", Timestamp.now());
+                                data.put("status", "diajukan");
+
+                                db.collection("kost").document(idKost)
+                                        .collection("pengajuan_perpanjangan")
+                                        .add(data)
+                                        .addOnSuccessListener(docRef -> {
+                                            Toast.makeText(getContext(), "Pengajuan berhasil dikirim", Toast.LENGTH_SHORT).show();
+                                            txtAlasan.setText("");
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Toast.makeText(getContext(), "Gagal menyimpan pengajuan", Toast.LENGTH_SHORT).show();
+                                        });
+                            }
+                        });
+            }
+        });
+    }
+
+    private String hitungTenggat(Date mulai, String durasi) {
+        try {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(mulai);
+
+            int bulan = 0;
+            if (durasi.toLowerCase().contains("bulan")) {
+                bulan = Integer.parseInt(durasi.split(" ")[0]);
+            }
+            cal.add(Calendar.MONTH, bulan);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            return sdf.format(cal.getTime());
+        } catch (Exception e) {
+            return "-";
+        }
+    }
+
+    private int hitungHariSisa(Date mulai, String durasi) {
+        try {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(mulai);
+
+            int bulan = 0;
+            if (durasi.toLowerCase().contains("bulan")) {
+                bulan = Integer.parseInt(durasi.split(" ")[0]);
+            }
+            cal.add(Calendar.MONTH, bulan);
+
+            long millisSisa = cal.getTimeInMillis() - System.currentTimeMillis();
+            return Math.max(0, (int) (millisSisa / (1000 * 60 * 60 * 24)));
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }

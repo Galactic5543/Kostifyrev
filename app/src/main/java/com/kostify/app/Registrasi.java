@@ -90,37 +90,6 @@ public class Registrasi extends AppCompatActivity {
                         }
                     });
         });
-
-        // Set listener untuk button PILIH METODE OTP
-        btnPilihOtp.setOnClickListener(v -> {
-            String email = inputEmail.getText().toString().trim();
-            String password = inputPassword.getText().toString().trim();
-            String phone = inputPhone.getText().toString().trim();
-            String name = ((EditText) findViewById(R.id.txtnama)).getText().toString().trim();
-
-            if (email.isEmpty() || password.isEmpty() || phone.isEmpty() || name.isEmpty()) {
-                Toast.makeText(this, "Semua field wajib diisi!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // 1. Buat akun di Firebase Auth
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // 2. Simpan data ke Firestore
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            if (user != null) {
-                                saveUserToFirestore(user.getUid(), name, email, phone);
-
-                                // 3. Arahkan ke halaman pilih metode OTP
-                                Intent intent = new Intent(this, PilihMetodeOtpActivity.class);
-                                intent.putExtra("USER_ID", user.getUid());
-                                startActivity(intent);
-                                finish();
-                            }
-                        }
-                    });
-        });
     }
 
     // Di dalam method sendVerificationLink()
@@ -204,7 +173,6 @@ public class Registrasi extends AppCompatActivity {
         userData.put("nama", name);
         userData.put("email", email);
         userData.put("telepon", phone);
-        userData.put("terverifikasi", false);
         userData.put("tanggal_daftar", FieldValue.serverTimestamp()); // Tambahkan ini
 
         FirebaseFirestore.getInstance()

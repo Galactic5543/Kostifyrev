@@ -29,6 +29,10 @@ import android.text.InputType;
 
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.firestore.FieldValue;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Login extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 9001;
@@ -93,7 +97,31 @@ public class Login extends AppCompatActivity {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         if (user != null) {
                             sessionManager.createLoginSession(user.getEmail());
+
+                            // Cek dan simpan ke Firestore
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            String uid = user.getUid();
+
+                            db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
+                                if (!documentSnapshot.exists()) {
+                                    // Ambil data dari akun Google
+                                    String name = user.getDisplayName();
+                                    String email = user.getEmail();
+                                    String phone = ""; // Kosongkan karena tidak tersedia dari Google
+
+                                    Map<String, Object> userData = new HashMap<>();
+                                    userData.put("nama", name != null ? name : "");
+                                    userData.put("email", email);
+                                    userData.put("telepon", phone);
+                                    userData.put("tanggal_daftar", FieldValue.serverTimestamp());
+
+                                    db.collection("users").document(uid).set(userData)
+                                            .addOnSuccessListener(aVoid -> Log.d("FIRESTORE", "User Google baru disimpan"))
+                                            .addOnFailureListener(e -> Log.e("FIRESTORE", "Gagal simpan user Google: " + e.getMessage()));
+                                }
+                            });
                         }
+
                         Intent intent = new Intent(Login.this, menu_utama_navigasi.class);
                         startActivity(intent);
                         finish();
@@ -102,6 +130,7 @@ public class Login extends AppCompatActivity {
                     }
                 });
     }
+
 
     private void showResetPasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

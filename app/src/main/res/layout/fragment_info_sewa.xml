@@ -51,67 +51,34 @@
             android:textStyle="bold"
             android:textColor="@color/warna10"/>
 
-        <TextView
+    <View
+        android:id="@+id/garis1"
+        android:layout_marginHorizontal="15dp"
+        android:layout_below="@id/namakost"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/garis" />
+
+
+    <TextView
             android:id="@+id/kamar"
             android:layout_marginHorizontal="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/namakost"
+            android:layout_below="@id/garis1"
             android:text="Kamar A1"
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="@color/warna10"/>
 
-        <TextView
-            android:id="@+id/tenggat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/kamar"
-            android:layout_marginHorizontal="15dp"
-            android:text="Sisa Waktu Sewa"
-            android:textSize="14sp"
-            android:textColor="@color/warna10"/>
-
-        <TextView
-            android:id="@+id/hari"
-            android:layout_marginHorizontal="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/kamar"
-            android:layout_alignParentEnd="true"
-            android:text="30 Hari"
-            android:textStyle="bold"
-            android:textColor="@color/warna10"
-            android:textSize="14sp"/>
-
-        <ProgressBar
-            android:id="@+id/progressewa"
-            android:layout_marginHorizontal="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_below="@+id/tenggat"
-            android:layout_marginTop="5dp"
-            android:max="30"
-            />
-
-        <TextView
-            android:id="@+id/textstatussewa"
-            android:layout_marginHorizontal="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/progressewa"
-            android:text="Status Sewa : Penghuni Aktif"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:textColor="@color/warna10"/>
 
         <TextView
             android:id="@+id/texttenggat"
             android:layout_width="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textstatussewa"
+            android:layout_below="@+id/kamar"
             android:text="Hingga 3/20/2025"
             android:textSize="14sp"
             android:textColor="@color/warna10"/>

@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -25,10 +26,9 @@ public class Profil extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        // Inflate layout fragment_profil.xml
         View view = inflater.inflate(R.layout.fragment_profil, container, false);
 
-        // Inisialisasi dan load iklan
+        // Load iklan
         mAdView = view.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -40,29 +40,35 @@ public class Profil extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Mengakses RelativeLayout dengan ID kontainermnlogout
         RelativeLayout mnLogoutLayout = view.findViewById(R.id.kontainermnlogout);
+        RelativeLayout akunLayout = view.findViewById(R.id.kontainermnakun); // ← Tambahan kontainer akun
 
-        // Menambahkan click listener untuk RelativeLayout mnlogout
+        // Aksi logout
         mnLogoutLayout.setOnClickListener(v -> {
-            // Hapus session
             SessionManager sessionManager = new SessionManager(requireContext());
             sessionManager.logoutUser();
 
-            // Sign out Firebase
             FirebaseAuth.getInstance().signOut();
 
-            // Sign out Google
             GoogleSignIn.getClient(
                     requireActivity(),
                     new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
             ).signOut();
 
-            // Pindah ke halaman login
             Intent intent = new Intent(requireActivity(), Login.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             requireActivity().finish();
+        });
+
+        // Aksi klik kontainer akun → buka popup profil
+        akunLayout.setOnClickListener(v -> {
+            Fragment popupFragment = new window_data_profil();
+            FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+            transaction.add(R.id.frameLayout, popupFragment); // pastikan ID frameLayout sesuai layout utama
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
     }
 }
