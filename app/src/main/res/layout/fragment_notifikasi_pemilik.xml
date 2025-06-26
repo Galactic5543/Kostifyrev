@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notifikasipemilik"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".notifikasi_pemilik">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:id="@+id/kontainermenutop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:background="@drawable/bg_top">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp" />
+
+        <ImageView
+            android:id="@+id/icsort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_sort"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp" />
+
+        <TextView
+            android:id="@+id/textnotifikasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notifikasi"
+            android:textSize="29sp"
+            android:textStyle="bold"
+            android:textColor="@color/warna10"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="287dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/textnotifikasi"
+            android:layout_alignStart="@+id/ic_back"
+            android:layout_alignEnd="@id/icsort"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/backgroundedittextstroke1radius15"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="20dp"
+            android:hint="Search"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/abu"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <!-- RecyclerView untuk daftar notifikasi -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerNotifikasi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/kontainermenutop"
+        android:padding="8dp" />
+
+    <!-- FrameLayout untuk detail pengajuan -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:visibility="gone" />
+</RelativeLayout>

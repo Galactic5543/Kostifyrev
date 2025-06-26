@@ -15,8 +15,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class info_sewa extends Fragment {
@@ -73,18 +71,19 @@ public class info_sewa extends Fragment {
 
                                 DocumentSnapshot penyewaDoc = penyewaSnapshot.getDocuments().get(0);
                                 String kamar = penyewaDoc.getString("kamar");
-                                String durasi = penyewaDoc.getString("durasi");
                                 String harga = penyewaDoc.getString("pembayaran sewa");
                                 String namaPenyewa = penyewaDoc.getString("nama_penyewa");
-                                Timestamp tanggalAwal = penyewaDoc.getTimestamp("perpanjang_terakhir");
+                                Timestamp tenggat = penyewaDoc.getTimestamp("tenggat");
 
                                 textNamaKost.setText(namaKost != null ? namaKost : "-");
                                 textKamar.setText(kamar != null ? kamar : "-");
 
-                                if (tanggalAwal != null && durasi != null) {
-                                    textTenggat.setText("Hingga " + hitungTenggat(tanggalAwal.toDate(), durasi));
+                                if (tenggat != null) {
+                                    String formattedTenggat = new SimpleDateFormat("dd MMMM yyyy", new Locale("id", "ID"))
+                                            .format(tenggat.toDate());
+                                    textTenggat.setText("Hingga " + formattedTenggat);
                                 } else {
-                                    textTenggat.setText("-");
+                                    textTenggat.setText("Hingga -");
                                 }
 
                                 textHarga.setText("Harga Sewa / Bulan : Rp. " + (harga != null ? harga : "-"));
@@ -104,18 +103,6 @@ public class info_sewa extends Fragment {
             Toast.makeText(getContext(), "Gagal mengambil data kost", Toast.LENGTH_SHORT).show();
             isiKosongSemua();
         });
-    }
-
-    private String hitungTenggat(Date mulai, String durasi) {
-        try {
-            int jumlahBulan = Integer.parseInt(durasi.split(" ")[0]);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(mulai);
-            cal.add(Calendar.MONTH, jumlahBulan);
-            return new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(cal.getTime());
-        } catch (Exception e) {
-            return "-";
-        }
     }
 
     private void isiKosongSemua() {

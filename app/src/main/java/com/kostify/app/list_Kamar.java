@@ -7,11 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +29,7 @@ public class list_Kamar extends Fragment {
 
     private RecyclerView recyclerView;
     private KamarAdapter adapter;
-    private List<Kamar> kamarList = new ArrayList<>();
+    private final List<Kamar> kamarList = new ArrayList<>();
     private FirebaseFirestore db;
 
     @Override
@@ -39,8 +42,14 @@ public class list_Kamar extends Fragment {
         recyclerView.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();
-        ambilDataKamar(); // ambil ID kost dari SharedPreferences di dalam fungsi ini
 
+        Button btnTambah = view.findViewById(R.id.btntambahkamar);
+        btnTambah.setOnClickListener(v -> {
+            window_tambah_kamar dialog = new window_tambah_kamar();
+            dialog.show(getParentFragmentManager(), "TambahKamarDialog");
+        });
+
+        ambilDataKamar();
         return view;
     }
 
@@ -64,7 +73,7 @@ public class list_Kamar extends Fragment {
             } else {
                 for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                     Kamar kamar = doc.toObject(Kamar.class);
-                    Log.d("KAMAR_DEBUG", "Kamar: " + kamar.getNama_kamar() + ", Status: " + kamar.getStatus());
+                    kamar.setId(doc.getId()); // <-- Simpan ID dokumen Firestore
                     kamarList.add(kamar);
                 }
             }
@@ -74,30 +83,41 @@ public class list_Kamar extends Fragment {
         });
     }
 
+    // ==================== MODEL ====================
     public static class Kamar {
+        private String id; // ← Firestore Document ID
         private String nama_kamar;
         private String status;
         private String penyewa;
 
         public Kamar() {}
 
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
         public String getNama_kamar() {
-            return nama_kamar;
+            return nama_kamar != null ? nama_kamar : "-";
         }
 
         public String getStatus() {
-            return status;
+            return status != null ? status : "-";
         }
 
         public String getPenyewa() {
-            return penyewa;
+            return penyewa != null ? penyewa : "-";
         }
     }
 
+    // ==================== ADAPTER ====================
     public class KamarAdapter extends RecyclerView.Adapter<KamarAdapter.KamarViewHolder> {
 
-        private Context context;
-        private List<Kamar> kamarList;
+        private final Context context;
+        private final List<Kamar> kamarList;
 
         public KamarAdapter(Context context, List<Kamar> kamarList) {
             this.context = context;
@@ -117,6 +137,12 @@ public class list_Kamar extends Fragment {
             holder.namaKamar.setText(kamar.getNama_kamar());
             holder.status.setText("Status : " + kamar.getStatus());
             holder.penyewa.setText("Penyewa : " + kamar.getPenyewa());
+
+            // Tombol Edit
+            holder.btnEdit.setOnClickListener(v -> {
+                window_edit_kamar dialog = window_edit_kamar.newInstance(kamar.getId(), kamar.getNama_kamar());
+                dialog.show(((FragmentActivity) context).getSupportFragmentManager(), "EditKamarDialog");
+            });
         }
 
         @Override
@@ -126,12 +152,14 @@ public class list_Kamar extends Fragment {
 
         class KamarViewHolder extends RecyclerView.ViewHolder {
             TextView namaKamar, status, penyewa;
+            Button btnEdit;
 
             public KamarViewHolder(@NonNull View itemView) {
                 super(itemView);
                 namaKamar = itemView.findViewById(R.id.textnamakamar);
                 status = itemView.findViewById(R.id.textstatus);
                 penyewa = itemView.findViewById(R.id.textpenyewa);
+                btnEdit = itemView.findViewById(R.id.btneditkamar);
             }
         }
     }

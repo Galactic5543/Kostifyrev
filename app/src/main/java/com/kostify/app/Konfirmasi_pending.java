@@ -17,13 +17,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Konfirmasi_pending extends Fragment {
@@ -80,7 +83,7 @@ public class Konfirmasi_pending extends Fragment {
             }
 
             String kamarDipilih = spinnerKamar.getSelectedItem().toString();
-            String durasi = spinnerDurasi.getSelectedItem().toString();
+            String durasiStr = spinnerDurasi.getSelectedItem().toString();
             String harga = hargaSewa.getText().toString().trim();
 
             if (harga.isEmpty()) {
@@ -88,24 +91,31 @@ public class Konfirmasi_pending extends Fragment {
                 return;
             }
 
+            // Hitung tanggal tenggat
+            int jumlahBulan = getJumlahBulanFromDurasi(durasiStr);
+            Calendar calendar = Calendar.getInstance();
+            Timestamp tanggalKonfirmasi = Timestamp.now();
+            calendar.setTime(tanggalKonfirmasi.toDate());
+            calendar.add(Calendar.MONTH, jumlahBulan);
+            Timestamp tenggat = new Timestamp(calendar.getTime());
+
             Map<String, Object> dataPenyewaan = new HashMap<>();
             dataPenyewaan.put("id_user", idUser);
             dataPenyewaan.put("nama_penyewa", namaPenyewa);
             dataPenyewaan.put("kamar", kamarDipilih);
-            dataPenyewaan.put("durasi", durasi);
+            dataPenyewaan.put("durasi", durasiStr);
             dataPenyewaan.put("pembayaran sewa", harga);
-            dataPenyewaan.put("tanggal_konfirmasi", FieldValue.serverTimestamp());
-            dataPenyewaan.put("perpanjang_terakhir", FieldValue.serverTimestamp());
-
+            dataPenyewaan.put("tanggal_masuk", tanggalKonfirmasi);
+            dataPenyewaan.put("tenggat", tenggat);
+            dataPenyewaan.put("perpanjang_terakhir", tanggalKonfirmasi); // disesuaikan
 
             db.collection("kost")
                     .document(idKost)
                     .collection("penyewa")
                     .add(dataPenyewaan)
                     .addOnSuccessListener(documentReference -> {
-                        Toast.makeText(requireContext(), "Penyewaan berhasil disimpan", Toast.LENGTH_SHORT).show();
 
-                        // Update kamar
+                        // Update status kamar
                         db.collection("kost")
                                 .document(idKost)
                                 .collection("kamar")
@@ -127,9 +137,8 @@ public class Konfirmasi_pending extends Fragment {
                                                 .document(idKamarDoc)
                                                 .update(updateKamar)
                                                 .addOnSuccessListener(unused -> {
-                                                    Toast.makeText(requireContext(), "Kamar berhasil diperbarui", Toast.LENGTH_SHORT).show();
 
-                                                    // Hapus data pending berdasarkan id_user
+                                                    // Hapus data pending
                                                     db.collection("kost")
                                                             .document(idKost)
                                                             .collection("pending")
@@ -141,21 +150,16 @@ public class Konfirmasi_pending extends Fragment {
                                                                             .document(idKost)
                                                                             .collection("pending")
                                                                             .document(doc.getId())
-                                                                            .delete()
-                                                                            .addOnSuccessListener(unused2 -> {
-                                                                                Log.d("HAPUS_PENDING", "Data pending dihapus: " + doc.getId());
-                                                                            })
-                                                                            .addOnFailureListener(e -> {
-                                                                                Log.e("HAPUS_PENDING", "Gagal hapus pending: " + e.getMessage());
-                                                                            });
+                                                                            .delete();
                                                                 }
+
+                                                                Toast.makeText(requireContext(),
+                                                                        "Konfirmasi berhasil dan data pending dihapus",
+                                                                        Toast.LENGTH_LONG).show();
                                                             })
                                                             .addOnFailureListener(e -> {
-                                                                Log.e("HAPUS_PENDING", "Gagal ambil pending: " + e.getMessage());
+                                                                Log.e("DELETE_PENDING", "Gagal hapus data pending: " + e.getMessage());
                                                             });
-                                                })
-                                                .addOnFailureListener(e -> {
-                                                    Log.e("UPDATE_KAMAR", "Gagal update kamar: " + e.getMessage());
                                                 });
                                     }
                                 });
@@ -168,8 +172,27 @@ public class Konfirmasi_pending extends Fragment {
         return view;
     }
 
+    private int getJumlahBulanFromDurasi(String durasi) {
+        switch (durasi) {
+            case "1 Bulan":
+                return 1;
+            case "3 Bulan":
+                return 3;
+            case "6 Bulan":
+                return 6;
+            case "12 Bulan":
+                return 12;
+            default:
+                return 1;
+        }
+    }
+
+    private String formatTanggal(long millis) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", new Locale("id", "ID"));
+        return sdf.format(millis);
+    }
+
     private void loadKamarKosongKeSpinner(Spinner spinnerKamar) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         SharedPreferences prefs = requireContext().getSharedPreferences("kostPrefs", Context.MODE_PRIVATE);
         String kostId = prefs.getString("selectedKostId", null);
 
@@ -206,8 +229,6 @@ public class Konfirmasi_pending extends Fragment {
                     .addOnFailureListener(e -> {
                         Log.e("SPINNER_KAMAR", "Gagal ambil kamar: " + e.getMessage());
                     });
-        } else {
-            Log.e("SPINNER_KAMAR", "ID Kost tidak ditemukan di SharedPreferences");
         }
     }
 

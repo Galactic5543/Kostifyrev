@@ -22,7 +22,7 @@
         android:id="@+id/namakost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kost Melati"
+        android:text="Kost -"
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@color/warna10"/>
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/namakost"
-        android:text="Kamar A1"
+        android:text="Kamar -"
         android:textStyle="bold"
         android:textSize="20sp"
         android:textColor="@color/warna10"/>
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/kamar"
-        android:text="Hingga 20/5/2025"
+        android:text="Hingga -"
         android:textSize="11sp"
         android:textColor="@color/warna10"/>
 
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/kamar"
         android:layout_alignParentEnd="true"
-        android:text="30 Hari"
+        android:text="- Hari"
         android:textStyle="bold"
         android:textColor="@color/warna10"
         android:textSize="11sp"/>

@@ -44,7 +44,7 @@
             android:id="@+id/namakost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kost Melati"
+            android:text="Kost -"
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="15dp"
             android:textSize="25sp"
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/garis1"
-            android:text="Kamar A1"
+            android:text="Kamar -"
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="@color/warna10"/>
@@ -79,7 +79,7 @@
             android:layout_marginHorizontal="15dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/kamar"
-            android:text="Hingga 3/20/2025"
+            android:text="Hingga -"
             android:textSize="14sp"
             android:textColor="@color/warna10"/>
 
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/garis"
             android:layout_marginTop="8dp"
-            android:text="Penyewa : Fajar Nugroho"
+            android:text="Penyewa : -"
             android:textSize="14sp"
             android:textColor="@color/warna10"/>
 
@@ -123,7 +123,7 @@
             android:layout_marginHorizontal="15dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textpenyewa"
-            android:text="No.Whatsapp : 085283752194"
+            android:text="No.Whatsapp : -"
             android:textSize="14sp"
             android:textColor="@color/warna10"/>
 

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detailScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/detailContainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Judul -->
+        <TextView
+            android:id="@+id/detailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detail Pengajuan"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/warna10"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Nama Penyewa -->
+        <TextView
+            android:id="@+id/detailNamaPenyewa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama: -"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Durasi (khusus perpanjangan sewa) -->
+        <TextView
+            android:id="@+id/detailDurasiPerpanjangan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Durasi: -"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
+        <!-- Alasan (khusus perpanjangan sewa) -->
+        <TextView
+            android:id="@+id/detailAlasan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alasan: -"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
+        <!-- Jenis Kerusakan -->
+        <TextView
+            android:id="@+id/detailJenisKerusakan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jenis Kerusakan: -"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
+        <!-- Deskripsi Kerusakan -->
+        <TextView
+            android:id="@+id/detailDeskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi: -"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
+        <!-- Tanggal/Waktu -->
+        <TextView
+            android:id="@+id/detailWaktu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diajukan pada: -"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/abu" />
+
+        <Button
+            android:id="@+id/btnkonfirmasi"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Konfirmasi Pengajuan"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/backgroundbutton"
+            android:backgroundTint="@color/warna7"
+            android:layout_marginHorizontal="30dp"
+            android:textSize="14sp"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</ScrollView>

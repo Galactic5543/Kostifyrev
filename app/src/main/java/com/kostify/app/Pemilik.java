@@ -18,8 +18,6 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -203,30 +201,34 @@ public class Pemilik extends Fragment {
 
 
     private void fetchJumlahKamar(String kostId) {
-        CollectionReference kamarRef = db.collection("kost")
-                .document(kostId)
-                .collection("kamar");
+        db.collection("kost").document(kostId).collection("kamar")
+                .get()
+                .addOnSuccessListener(querySnapshots -> {
+                    int jumlahKosong = 0;
+                    int jumlahIsi = 0;
 
-        kamarRef.get().addOnSuccessListener(querySnapshots -> {
-            int jumlahKosong = 0;
-            int jumlahIsi = 0;
+                    for (DocumentSnapshot kamar : querySnapshots) {
+                        String status = kamar.getString("status");
+                        if ("kosong".equalsIgnoreCase(status)) {
+                            jumlahKosong++;
+                        } else if ("terisi".equalsIgnoreCase(status)) {
+                            jumlahIsi++;
+                        }
+                    }
 
-            for (QueryDocumentSnapshot snapshot : querySnapshots) {
-                String status = snapshot.getString("status");
-                if ("kosong".equalsIgnoreCase(status)) {
-                    jumlahKosong++;
-                } else if ("Terisi".equalsIgnoreCase(status)) {
-                    jumlahIsi++;
-                }
-            }
+                    // Set ke TextView (pastikan kamu punya TextView-nya di layout)
+                    angkamarkosongTextView.setText(String.valueOf(jumlahIsi));
+                    angakamarisiTextView.setText(String.valueOf(jumlahKosong));
 
-            // Set ke TextView
-            angkamarkosongTextView.setText(String.valueOf(jumlahKosong));
-            angakamarisiTextView.setText(String.valueOf(jumlahIsi));
-        }).addOnFailureListener(e -> {
-            Toast.makeText(getContext(), "Gagal mengambil data kamar", Toast.LENGTH_SHORT).show();
-        });
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("FetchKamar", "Gagal mengambil data kamar: " + e.getMessage());
+                    angkamarkosongTextView.setText("0");
+                    angakamarisiTextView.setText("0");
+                });
     }
+
+
 
     // Mengupdate data detail kost saat dipilih
     private void updateKostData(String kostName) {
@@ -279,20 +281,59 @@ public class Pemilik extends Fragment {
     // Menghapus kost yang dipilih dari Firestore
     private void hapusKost() {
         if (auth.getCurrentUser() == null || selectedKostId == null) {
-            Log.d("Pemilik", "Tidak ada kost yang dipilih.");
+            Toast.makeText(getContext(), "Kost belum dipilih", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        db.collection("kost").document(selectedKostId)
-                .delete()
-                .addOnSuccessListener(aVoid -> {
-                    Log.d("Pemilik", "Kost berhasil dihapus.");
-                    fetchKostNames();
-                    gantikost.setSelection(0);
-                    setEmptyState();
-                })
-                .addOnFailureListener(e -> Log.d("Pemilik", "Gagal menghapus kost: " + e.getMessage()));
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String kostId = selectedKostId;
+
+        // Daftar semua subkoleksi di dalam kost
+        String[] subkoleksi = {
+                "kamar",
+                "penyewa",
+                "pengajuan_perpanjangan",
+                "pengajuan_kerusakan",
+                "notifikasi"
+        };
+
+
+        // Hitung berapa koleksi yang selesai dihapus
+        final int[] selesai = {0};
+
+        for (String namaSubkoleksi : subkoleksi) {
+            db.collection("kost").document(kostId).collection(namaSubkoleksi)
+                    .get()
+                    .addOnSuccessListener(query -> {
+                        for (DocumentSnapshot doc : query.getDocuments()) {
+                            doc.getReference().delete();
+                        }
+
+                        // Cek jika semua subkoleksi sudah selesai
+                        selesai[0]++;
+                        if (selesai[0] == subkoleksi.length) {
+                            // Setelah semua subkoleksi dihapus → hapus dokumen kost
+                            db.collection("kost").document(kostId)
+                                    .delete()
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(getContext(), "Kost berhasil dihapus", Toast.LENGTH_SHORT).show();
+                                        fetchKostNames(); // refresh spinner
+                                        gantikost.setSelection(0);
+                                        setEmptyState();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(getContext(), "Gagal menghapus kost", Toast.LENGTH_SHORT).show();
+                                        Log.e("Pemilik", "Gagal hapus kost: " + e.getMessage());
+                                    });
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("Pemilik", "Gagal hapus koleksi " + namaSubkoleksi + ": " + e.getMessage());
+                        Toast.makeText(getContext(), "Gagal hapus " + namaSubkoleksi, Toast.LENGTH_SHORT).show();
+                    });
+        }
     }
+
 
     // Utility method untuk set teks atau default jika null/empty
     private void setTextOrDefault(String value, TextView textView, String defaultText) {
@@ -360,7 +401,7 @@ public class Pemilik extends Fragment {
 
     // Navigasi ke fragment notifikasi
     private void opennotifikasi() {
-        navigateToFragment(new Notifikasi());
+        navigateToFragment(new notifikasi_pemilik());
     }
 
     // Fungsi bantu untuk navigasi fragment

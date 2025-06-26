@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +19,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Profil extends Fragment {
 
@@ -41,9 +44,33 @@ public class Profil extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         RelativeLayout mnLogoutLayout = view.findViewById(R.id.kontainermnlogout);
-        RelativeLayout akunLayout = view.findViewById(R.id.kontainermnakun); // ← Tambahan kontainer akun
+        RelativeLayout akunLayout = view.findViewById(R.id.kontainermnakun);
 
-        // Aksi logout
+        TextView textNamaAkun = view.findViewById(R.id.textnamaakun);
+        TextView textNoWhatsapp = view.findViewById(R.id.nowhatsapp);
+
+        // Ambil data user dari Firestore
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance().collection("users")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String nama = documentSnapshot.getString("nama");
+                        String telepon = documentSnapshot.getString("telepon");
+
+                        textNamaAkun.setText(nama != null ? nama : "-");
+                        textNoWhatsapp.setText(telepon != null ? telepon : "-");
+                    } else {
+                        Toast.makeText(requireContext(), "Data pengguna tidak ditemukan", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(requireContext(), "Gagal memuat data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+
+        // Logout
         mnLogoutLayout.setOnClickListener(v -> {
             SessionManager sessionManager = new SessionManager(requireContext());
             sessionManager.logoutUser();
@@ -61,12 +88,12 @@ public class Profil extends Fragment {
             requireActivity().finish();
         });
 
-        // Aksi klik kontainer akun → buka popup profil
+        // Klik akun → buka popup profil
         akunLayout.setOnClickListener(v -> {
             Fragment popupFragment = new window_data_profil();
             FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-            transaction.add(R.id.frameLayout, popupFragment); // pastikan ID frameLayout sesuai layout utama
+            transaction.add(R.id.frameLayout, popupFragment);
             transaction.addToBackStack(null);
             transaction.commit();
         });

@@ -291,55 +291,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/warna10"/>
 
-            <RelativeLayout
-                android:id="@+id/notifikasi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:background="@drawable/bgradius15"
-                android:backgroundTint="@color/white"
-                android:elevation="7dp"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/ic_notif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_notif"/>
-
-                <TextView
-                    android:id="@+id/judul_notif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/ic_notif"
-                    android:text="Validasi Bukti Pembayaran"
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:textColor="@color/warna10"
-                    android:layout_marginLeft="10dp"/>
-
-                <TextView
-                    android:id="@+id/waktu_notif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:text="5/08/2025"
-                    android:textSize="12sp"
-                    android:textColor="@color/warna10"
-                    android:layout_marginLeft="20dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/judul_notif"
-                    android:layout_toEndOf="@+id/ic_notif"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="3dp"
-                    android:text="Fajar Nugroho meminta validasi bukti pembayaran untuk perpanjangan sewa"
-                    android:textSize="12sp"
-                    android:textColor="@color/warna10"/>
-            </RelativeLayout>
 
             <!-- Iklan -->
             <com.google.android.gms.ads.AdView

@@ -45,7 +45,6 @@ public class pengajuan_sewa extends Fragment {
 
         db = FirebaseFirestore.getInstance();
 
-        // Inisialisasi komponen UI
         dropdownDurasi = view.findViewById(R.id.dropdownperpanjangan);
         txtAlasan = view.findViewById(R.id.txtalasanperpanjangan);
         btnAjukan = view.findViewById(R.id.btnajukanperpanjangansewa);
@@ -55,7 +54,6 @@ public class pengajuan_sewa extends Fragment {
         hari = view.findViewById(R.id.hari);
         progressBar = view.findViewById(R.id.progressewa);
 
-        // Isi spinner durasi dari array
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.list_durasi_perpanjangan,
@@ -89,21 +87,21 @@ public class pengajuan_sewa extends Fragment {
 
                                 String nama = kostDoc.getString("nama_kost");
                                 String namaKamar = penyewaDoc.getString("kamar");
-                                String durasi = penyewaDoc.getString("durasi");
-                                Timestamp tanggalAwal = penyewaDoc.getTimestamp("perpanjang_terakhir");
 
                                 namaKost.setText(nama != null ? nama : "Kost -");
                                 kamar.setText(namaKamar != null ? namaKamar : "Kamar -");
 
-                                if (tanggalAwal != null && durasi != null) {
-                                    Date awal = tanggalAwal.toDate();
-                                    String akhir = hitungTenggat(awal, durasi);
-                                    tenggat.setText("Hingga " + akhir);
+                                Timestamp tenggatTime = penyewaDoc.getTimestamp("tenggat");
 
-                                    int sisa = hitungHariSisa(awal, durasi);
-                                    hari.setText(sisa + " Hari");
-                                    progressBar.setMax(sisa);
-                                    progressBar.setProgress(sisa);
+                                if (tenggatTime != null) {
+                                    Date tanggalTenggat = tenggatTime.toDate();
+                                    String formatted = new SimpleDateFormat("dd MMMM yyyy", new Locale("id", "ID")).format(tanggalTenggat);
+                                    tenggat.setText("Hingga " + formatted);
+
+                                    int sisaHari = hitungHariSisa(tanggalTenggat);
+                                    hari.setText(sisaHari + " Hari");
+                                    progressBar.setMax(sisaHari);
+                                    progressBar.setProgress(sisaHari);
                                 } else {
                                     tenggat.setText("Hingga -");
                                     hari.setText("- Hari");
@@ -162,39 +160,8 @@ public class pengajuan_sewa extends Fragment {
         });
     }
 
-    private String hitungTenggat(Date mulai, String durasi) {
-        try {
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(mulai);
-
-            int bulan = 0;
-            if (durasi.toLowerCase().contains("bulan")) {
-                bulan = Integer.parseInt(durasi.split(" ")[0]);
-            }
-            cal.add(Calendar.MONTH, bulan);
-
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            return sdf.format(cal.getTime());
-        } catch (Exception e) {
-            return "-";
-        }
-    }
-
-    private int hitungHariSisa(Date mulai, String durasi) {
-        try {
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(mulai);
-
-            int bulan = 0;
-            if (durasi.toLowerCase().contains("bulan")) {
-                bulan = Integer.parseInt(durasi.split(" ")[0]);
-            }
-            cal.add(Calendar.MONTH, bulan);
-
-            long millisSisa = cal.getTimeInMillis() - System.currentTimeMillis();
-            return Math.max(0, (int) (millisSisa / (1000 * 60 * 60 * 24)));
-        } catch (Exception e) {
-            return 0;
-        }
+    private int hitungHariSisa(Date tenggat) {
+        long millisSisa = tenggat.getTime() - System.currentTimeMillis();
+        return Math.max(0, (int) (millisSisa / (1000 * 60 * 60 * 24)));
     }
 }
